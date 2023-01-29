@@ -6,36 +6,36 @@ Test('multipliedBy', function () {
         I = 'Infinity';
 
     function t(multiplicand, multiplier, expected) {
-        Test.areEqual(String(expected), String(new BigNumber(multiplicand).multipliedBy(multiplier)));
+        Test.areEqual(String(expected), String(new BigDecimal(multiplicand).multipliedBy(multiplier)));
     }
 
-    Test.areEqual(BigNumber.prototype.multipliedBy, BigNumber.prototype.times);
+    Test.areEqual(BigDecimal.prototype.multipliedBy, BigDecimal.prototype.times);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         EXPONENTIAL_AT: [-7, 21],
         RANGE: 1E9
     });
 
-    Test.areEqual('0', new BigNumber(1).times(0).valueOf());
-    Test.areEqual('-0', new BigNumber(1).times(-0).valueOf());
-    Test.areEqual('-0', new BigNumber(-1).times(0).valueOf());
-    Test.areEqual('0', new BigNumber(-1).times(-0).valueOf());
+    Test.areEqual('0', new BigDecimal(1).times(0).valueOf());
+    Test.areEqual('-0', new BigDecimal(1).times(-0).valueOf());
+    Test.areEqual('-0', new BigDecimal(-1).times(0).valueOf());
+    Test.areEqual('0', new BigDecimal(-1).times(-0).valueOf());
     t(1, N, N);
     t(-1, N, N);
     t(1, I, I);
     t(1, -I, -I);
     t(-1, I, -I);
     t(-1, -I, I);
-    Test.areEqual('0', new BigNumber(0).times(1).valueOf());
-    Test.areEqual('-0', new BigNumber(0).times(-1).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).times(1).valueOf());
-    Test.areEqual('0', new BigNumber(-0).times(-1).valueOf());
-    Test.areEqual('0', new BigNumber(0).times(0).valueOf());
-    Test.areEqual('-0', new BigNumber(0).times(-0).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).times(0).valueOf());
-    Test.areEqual('0', new BigNumber(-0).times(-0).valueOf());
+    Test.areEqual('0', new BigDecimal(0).times(1).valueOf());
+    Test.areEqual('-0', new BigDecimal(0).times(-1).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).times(1).valueOf());
+    Test.areEqual('0', new BigDecimal(-0).times(-1).valueOf());
+    Test.areEqual('0', new BigDecimal(0).times(0).valueOf());
+    Test.areEqual('-0', new BigDecimal(0).times(-0).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).times(0).valueOf());
+    Test.areEqual('0', new BigDecimal(-0).times(-0).valueOf());
     t(0, N, N);
     t(-0, N, N);
     t(0, I, N);

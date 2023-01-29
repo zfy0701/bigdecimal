@@ -3,10 +3,10 @@ if (typeof Test === 'undefined') require('../tester');
 Test('negated', function () {
 
     function t(expected, value){
-        Test.areEqual(String(expected), new BigNumber(value).negated().toString());
+        Test.areEqual(String(expected), new BigDecimal(value).negated().toString());
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -452,7 +452,7 @@ Test('negated', function () {
     t('-0.032192', '0.032192');
     t('2.6e-8', '-0.000000026');
 
-    BigNumber.config({EXPONENTIAL_AT: 0});
+    BigDecimal.config({EXPONENTIAL_AT: 0});
 
     t('-5.0600621890668482322956892808849303e+20', '5.0600621890668482322956892808849303e+20');
     t('7e+0', '-7e+0');
@@ -486,20 +486,20 @@ Test('negated', function () {
     t('NaN', NaN);
     t('NaN', 'NaN');
 
-    BigNumber.config({EXPONENTIAL_AT: 1e+9});
+    BigDecimal.config({EXPONENTIAL_AT: 1e+9});
 
-    Test.areEqual(-1, new BigNumber(2).negated().s);
-    Test.areEqual(1, new BigNumber(-2).negated().s);
-    Test.areEqual(null, new BigNumber(NaN).negated().s);
-    Test.areEqual(null, new BigNumber('-NaN').negated().s);
-    Test.areEqual(-1, new BigNumber(Infinity).negated().s);
-    Test.areEqual(1, new BigNumber('-Infinity').negated().s);
+    Test.areEqual(-1, new BigDecimal(2).negated().s);
+    Test.areEqual(1, new BigDecimal(-2).negated().s);
+    Test.areEqual(null, new BigDecimal(NaN).negated().s);
+    Test.areEqual(null, new BigDecimal('-NaN').negated().s);
+    Test.areEqual(-1, new BigDecimal(Infinity).negated().s);
+    Test.areEqual(1, new BigDecimal('-Infinity').negated().s);
 
-    Test.areEqual('-1', new BigNumber(1).negated().valueOf());
-    Test.areEqual('-0', new BigNumber(0).negated().valueOf());
-    Test.areEqual('-0', new BigNumber(0).negated().valueOf());
-    Test.areEqual('-0', new BigNumber('0.00000').negated().valueOf());
-    Test.areEqual('-0', new BigNumber('+0.0').negated().valueOf());
-    Test.areEqual('0', new BigNumber(-0).negated().valueOf());
-    Test.areEqual('0', new BigNumber('-0').negated().valueOf());
+    Test.areEqual('-1', new BigDecimal(1).negated().valueOf());
+    Test.areEqual('-0', new BigDecimal(0).negated().valueOf());
+    Test.areEqual('-0', new BigDecimal(0).negated().valueOf());
+    Test.areEqual('-0', new BigDecimal('0.00000').negated().valueOf());
+    Test.areEqual('-0', new BigDecimal('+0.0').negated().valueOf());
+    Test.areEqual('0', new BigDecimal(-0).negated().valueOf());
+    Test.areEqual('0', new BigDecimal('-0').negated().valueOf());
 });

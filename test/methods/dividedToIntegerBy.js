@@ -6,12 +6,12 @@ Test('dividedToIntegerBy', function () {
         I = 'Infinity';
 
     function t(dividend, divisor, expected) {
-        Test.areEqual(String(expected), String(new BigNumber(dividend).dividedToIntegerBy(divisor)));
+        Test.areEqual(String(expected), String(new BigDecimal(dividend).dividedToIntegerBy(divisor)));
     }
 
-    Test.areEqual(BigNumber.prototype.dividedToIntegerBy, BigNumber.prototype.idiv);
+    Test.areEqual(BigDecimal.prototype.dividedToIntegerBy, BigDecimal.prototype.idiv);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 40,
         ROUNDING_MODE: 4,
         EXPONENTIAL_AT: 0,

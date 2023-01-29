@@ -31,9 +31,9 @@
 //
 // The use of compiler option `--strictNullChecks` is recommended.
 
-export default BigNumber;
+export default BigDecimal;
 
-export namespace BigNumber {
+export namespace BigDecimal {
 
   /** See `BigNumber.config` (alias `BigNumber.set`) and `BigNumber.clone`. */
   interface Config {
@@ -66,7 +66,7 @@ export namespace BigNumber {
      * BigNumber.set({ ROUNDING_MODE: BigNumber.ROUND_UP })
      * ```
      */
-    ROUNDING_MODE?: BigNumber.RoundingMode;
+    ROUNDING_MODE?: BigDecimal.RoundingMode;
 
     /**
      * An integer, 0 to 1e+9, or an array, [-1e+9 to 0, 0 to 1e+9].
@@ -202,7 +202,7 @@ export namespace BigNumber {
      * BigNumber.set({ MODULO_MODE: 9 })          // equivalent
      * ```
      */
-    MODULO_MODE?: BigNumber.ModuloMode;
+    MODULO_MODE?: BigDecimal.ModuloMode;
 
     /**
      * An integer, 0 to 1e+9. Default value: 0.
@@ -256,7 +256,7 @@ export namespace BigNumber {
      * })
      * ```
      */
-    FORMAT?: BigNumber.Format;
+    FORMAT?: BigDecimal.Format;
 
     /**
      * The alphabet used for base conversion. The length of the alphabet corresponds to the maximum
@@ -321,13 +321,13 @@ export namespace BigNumber {
     [key: string]: any;
   }
 
-  type Constructor = typeof BigNumber;
+  type Constructor = typeof BigDecimal;
   type ModuloMode = 0 | 1 | 3 | 6 | 9;
   type RoundingMode = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   type Value = string | number | Instance;
 }
 
-export declare class BigNumber implements BigNumber.Instance {
+export declare class BigDecimal implements BigDecimal.Instance {
 
   /** Used internally to identify a BigNumber instance. */
   private readonly _isBigNumber: true;
@@ -437,7 +437,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param base The base of `n`, integer, 2 to 36 (or `ALPHABET.length`, see `ALPHABET`).
    */
-  constructor(n: BigNumber.Value, base?: number);
+  constructor(n: BigDecimal.Value, base?: number);
 
   /**
    * Returns a BigNumber whose value is the absolute value, i.e. the magnitude, of the value of this
@@ -450,7 +450,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * x.absoluteValue()           // '0.8'
    * ```
    */
-  absoluteValue(): BigNumber;
+  absoluteValue(): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the absolute value, i.e. the magnitude, of the value of this
@@ -463,7 +463,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * x.abs()                     // '0.8'
    * ```
    */
-  abs(): BigNumber;
+  abs(): BigDecimal;
 
   /**
    *  Returns |                                                               |
@@ -485,7 +485,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  comparedTo(n: BigNumber.Value, base?: number): number;
+  comparedTo(n: BigDecimal.Value, base?: number): number;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber rounded by rounding mode
@@ -518,7 +518,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
   decimalPlaces(): number | null;
-  decimalPlaces(decimalPlaces: number, roundingMode?: BigNumber.RoundingMode): BigNumber;
+  decimalPlaces(decimalPlaces: number, roundingMode?: BigDecimal.RoundingMode): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber rounded by rounding mode
@@ -551,7 +551,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
   dp(): number | null;
-  dp(decimalPlaces: number, roundingMode?: BigNumber.RoundingMode): BigNumber;
+  dp(decimalPlaces: number, roundingMode?: BigDecimal.RoundingMode): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber divided by `n`, rounded
@@ -568,7 +568,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  dividedBy(n: BigNumber.Value, base?: number): BigNumber;
+  dividedBy(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber divided by `n`, rounded
@@ -585,7 +585,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  div(n: BigNumber.Value, base?: number): BigNumber;
+  div(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the integer part of dividing the value of this BigNumber by
@@ -602,7 +602,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  dividedToIntegerBy(n: BigNumber.Value, base?: number): BigNumber;
+  dividedToIntegerBy(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the integer part of dividing the value of this BigNumber by
@@ -619,7 +619,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  idiv(n: BigNumber.Value, base?: number): BigNumber;
+  idiv(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber exponentiated by `n`, i.e.
@@ -652,8 +652,8 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n The exponent, an integer.
    * @param [m] The modulus.
    */
-  exponentiatedBy(n: BigNumber.Value, m?: BigNumber.Value): BigNumber;
-  exponentiatedBy(n: number, m?: BigNumber.Value): BigNumber;
+  exponentiatedBy(n: BigDecimal.Value, m?: BigDecimal.Value): BigDecimal;
+  exponentiatedBy(n: number, m?: BigDecimal.Value): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber exponentiated by `n`, i.e.
@@ -686,8 +686,8 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n The exponent, an integer.
    * @param [m] The modulus.
    */
-  pow(n: BigNumber.Value, m?: BigNumber.Value): BigNumber;
-  pow(n: number, m?: BigNumber.Value): BigNumber;
+  pow(n: BigDecimal.Value, m?: BigDecimal.Value): BigDecimal;
+  pow(n: number, m?: BigDecimal.Value): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber rounded to an integer using
@@ -708,7 +708,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param {BigNumber.RoundingMode} [rm] The roundng mode, an integer, 0 to 8.
    */
-  integerValue(rm?: BigNumber.RoundingMode): BigNumber;
+  integerValue(rm?: BigDecimal.RoundingMode): BigDecimal;
 
   /**
    * Returns `true` if the value of this BigNumber is equal to the value of `n`, otherwise returns
@@ -730,7 +730,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  isEqualTo(n: BigNumber.Value, base?: number): boolean;
+  isEqualTo(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is equal to the value of `n`, otherwise returns
@@ -752,7 +752,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  eq(n: BigNumber.Value, base?: number): boolean;
+  eq(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is a finite number, otherwise returns `false`.
@@ -783,7 +783,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  isGreaterThan(n: BigNumber.Value, base?: number): boolean;
+  isGreaterThan(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is greater than the value of `n`, otherwise
@@ -800,7 +800,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  gt(n: BigNumber.Value, base?: number): boolean;
+  gt(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is greater than or equal to the value of `n`,
@@ -817,7 +817,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  isGreaterThanOrEqualTo(n: BigNumber.Value, base?: number): boolean;
+  isGreaterThanOrEqualTo(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is greater than or equal to the value of `n`,
@@ -834,7 +834,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  gte(n: BigNumber.Value, base?: number): boolean;
+  gte(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is an integer, otherwise returns `false`.
@@ -863,7 +863,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  isLessThan(n: BigNumber.Value, base?: number): boolean;
+  isLessThan(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is less than the value of `n`, otherwise returns
@@ -880,7 +880,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  lt(n: BigNumber.Value, base?: number): boolean;
+  lt(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is less than or equal to the value of `n`,
@@ -897,7 +897,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  isLessThanOrEqualTo(n: BigNumber.Value, base?: number): boolean;
+  isLessThanOrEqualTo(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is less than or equal to the value of `n`,
@@ -914,7 +914,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  lte(n: BigNumber.Value, base?: number): boolean;
+  lte(n: BigDecimal.Value, base?: number): boolean;
 
   /**
    * Returns `true` if the value of this BigNumber is `NaN`, otherwise returns `false`.
@@ -977,7 +977,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  minus(n: BigNumber.Value, base?: number): BigNumber;
+  minus(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber modulo `n`, i.e. the integer
@@ -1003,7 +1003,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  modulo(n: BigNumber.Value, base?: number): BigNumber;
+  modulo(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber modulo `n`, i.e. the integer
@@ -1029,7 +1029,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  mod(n: BigNumber.Value, base?: number): BigNumber;
+  mod(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber multiplied by `n`.
@@ -1047,7 +1047,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  multipliedBy(n: BigNumber.Value, base?: number): BigNumber;
+  multipliedBy(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber multiplied by `n`.
@@ -1065,7 +1065,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  times(n: BigNumber.Value, base?: number): BigNumber;
+  times(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber negated, i.e. multiplied by -1.
@@ -1077,7 +1077,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * y.negated()                     // '1.3'
    * ```
    */
-  negated(): BigNumber;
+  negated(): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber plus `n`.
@@ -1095,7 +1095,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param n A numeric value.
    * @param [base] The base of n.
    */
-  plus(n: BigNumber.Value, base?: number): BigNumber;
+  plus(n: BigDecimal.Value, base?: number): BigDecimal;
 
   /**
    * Returns the number of significant digits of the value of this BigNumber, or `null` if the value
@@ -1138,7 +1138,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param significantDigits Significant digits, integer, 1 to 1e+9.
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
-  precision(significantDigits: number, roundingMode?: BigNumber.RoundingMode): BigNumber;
+  precision(significantDigits: number, roundingMode?: BigDecimal.RoundingMode): BigDecimal;
 
   /**
    * Returns the number of significant digits of the value of this BigNumber,
@@ -1182,7 +1182,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param significantDigits Significant digits, integer, 1 to 1e+9.
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
-  sd(significantDigits: number, roundingMode?: BigNumber.RoundingMode): BigNumber;
+  sd(significantDigits: number, roundingMode?: BigDecimal.RoundingMode): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the value of this BigNumber shifted by `n` places.
@@ -1202,7 +1202,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n The shift value, integer, -9007199254740991 to 9007199254740991.
    */
-  shiftedBy(n: number): BigNumber;
+  shiftedBy(n: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the square root of the value of this BigNumber, rounded
@@ -1218,7 +1218,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * y.squareRoot()                  // '1.73205080756887729353'
    * ```
    */
-  squareRoot(): BigNumber;
+  squareRoot(): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the square root of the value of this BigNumber, rounded
@@ -1234,7 +1234,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * y.sqrt()                  // '1.73205080756887729353'
    * ```
    */
-  sqrt(): BigNumber;
+  sqrt(): BigDecimal;
 
   /**
    * Returns a string representing the value of this BigNumber in exponential notation rounded using
@@ -1269,7 +1269,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [decimalPlaces] Decimal places, integer, 0 to 1e+9.
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
-  toExponential(decimalPlaces: number, roundingMode?: BigNumber.RoundingMode): string;
+  toExponential(decimalPlaces: number, roundingMode?: BigDecimal.RoundingMode): string;
   toExponential(): string;
 
   /**
@@ -1307,7 +1307,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [decimalPlaces] Decimal places, integer, 0 to 1e+9.
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    */
-  toFixed(decimalPlaces: number, roundingMode?: BigNumber.RoundingMode): string;
+  toFixed(decimalPlaces: number, roundingMode?: BigDecimal.RoundingMode): string;
   toFixed(): string;
 
   /**
@@ -1368,11 +1368,11 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [roundingMode] Rounding mode, integer, 0 to 8.
    * @param [format] Formatting options object. See `BigNumber.Format`.
    */
-  toFormat(decimalPlaces: number, roundingMode: BigNumber.RoundingMode, format?: BigNumber.Format): string;
-  toFormat(decimalPlaces: number, roundingMode?: BigNumber.RoundingMode): string;
+  toFormat(decimalPlaces: number, roundingMode: BigDecimal.RoundingMode, format?: BigDecimal.Format): string;
+  toFormat(decimalPlaces: number, roundingMode?: BigDecimal.RoundingMode): string;
   toFormat(decimalPlaces?: number): string;
-  toFormat(decimalPlaces: number, format: BigNumber.Format): string;
-  toFormat(format: BigNumber.Format): string;
+  toFormat(decimalPlaces: number, format: BigDecimal.Format): string;
+  toFormat(format: BigDecimal.Format): string;
 
   /**
    * Returns an array of two BigNumbers representing the value of this BigNumber as a simple
@@ -1398,7 +1398,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param [max_denominator] The maximum denominator, integer > 0, or Infinity.
    */
-  toFraction(max_denominator?: BigNumber.Value): [BigNumber, BigNumber];
+  toFraction(max_denominator?: BigDecimal.Value): [BigDecimal, BigDecimal];
 
   /** As `valueOf`. */
   toJSON(): string;
@@ -1453,7 +1453,7 @@ export declare class BigNumber implements BigNumber.Instance {
    * @param [significantDigits] Significant digits, integer, 1 to 1e+9.
    * @param [roundingMode] Rounding mode, integer 0 to 8.
    */
-  toPrecision(significantDigits: number, roundingMode?: BigNumber.RoundingMode): string;
+  toPrecision(significantDigits: number, roundingMode?: BigDecimal.RoundingMode): string;
   toPrecision(): string;
 
   /**
@@ -1511,10 +1511,10 @@ export declare class BigNumber implements BigNumber.Instance {
   valueOf(): string;
 
   /** Helps ES6 import. */
-  private static readonly default?: BigNumber.Constructor;
+  private static readonly default?: BigDecimal.Constructor;
 
   /** Helps ES6 import. */
-  private static readonly BigNumber?: BigNumber.Constructor;
+  private static readonly BigNumber?: BigDecimal.Constructor;
 
   /** Rounds away from zero. */
   static readonly ROUND_UP: 0;
@@ -1613,7 +1613,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param [object] The configuration object.
    */
-  static clone(object?: BigNumber.Config): BigNumber.Constructor;
+  static clone(object?: BigDecimal.Config): BigDecimal.Constructor;
 
   /**
    * Configures the settings that apply to this BigNumber constructor.
@@ -1648,7 +1648,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param object The configuration object.
    */
-  static config(object?: BigNumber.Config): BigNumber.Config;
+  static config(object?: BigDecimal.Config): BigDecimal.Config;
 
   /**
    * Returns `true` if `value` is a BigNumber instance, otherwise returns `false`.
@@ -1671,7 +1671,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param value The value to test.
    */
-  static isBigNumber(value: any): value is BigNumber;
+  static isBigNumber(value: any): value is BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the maximum of the arguments.
@@ -1688,7 +1688,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n A numeric value.
    */
-  static maximum(...n: BigNumber.Value[]): BigNumber;
+  static maximum(...n: BigDecimal.Value[]): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the maximum of the arguments.
@@ -1705,7 +1705,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n A numeric value.
    */
-  static max(...n: BigNumber.Value[]): BigNumber;
+  static max(...n: BigDecimal.Value[]): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the minimum of the arguments.
@@ -1722,7 +1722,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n A numeric value.
    */
-  static minimum(...n: BigNumber.Value[]): BigNumber;
+  static minimum(...n: BigDecimal.Value[]): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the minimum of the arguments.
@@ -1739,7 +1739,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n A numeric value.
    */
-  static min(...n: BigNumber.Value[]): BigNumber;
+  static min(...n: BigDecimal.Value[]): BigDecimal;
 
   /**
    * Returns a new BigNumber with a pseudo-random value equal to or greater than 0 and less than 1.
@@ -1773,7 +1773,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param [decimalPlaces] Decimal places, integer, 0 to 1e+9.
    */
-  static random(decimalPlaces?: number): BigNumber;
+  static random(decimalPlaces?: number): BigDecimal;
 
   /**
    * Returns a BigNumber whose value is the sum of the arguments.
@@ -1790,7 +1790,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param n A numeric value.
    */
-  static sum(...n: BigNumber.Value[]): BigNumber;
+  static sum(...n: BigDecimal.Value[]): BigDecimal;
 
   /**
    * Configures the settings that apply to this BigNumber constructor.
@@ -1825,7 +1825,7 @@ export declare class BigNumber implements BigNumber.Instance {
    *
    * @param object The configuration object.
    */
-  static set(object?: BigNumber.Config): BigNumber.Config;
+  static set(object?: BigDecimal.Config): BigDecimal.Config;
 }
 
-export function BigNumber(n: BigNumber.Value, base?: number): BigNumber;
+export function BigNumber(n: BigDecimal.Value, base?: number): BigDecimal;

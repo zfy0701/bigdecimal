@@ -5717,7 +5717,7 @@ if (typeof define === "function" && define.amd != null) {
 	define({'BigDecimal':BigDecimal, 'MathContext':MathContext});
 } else if (typeof this === "object"){
 	// global-polluting outcome.
-	this.BigDecimal = BigDecimal;
+	this.Bignumber = BigDecimal;
 	this.MathContext = MathContext;
 }
 

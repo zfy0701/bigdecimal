@@ -6,28 +6,28 @@ Test('clone', function () {
         Test.isTrue(value);
     }
 
-    var Big = BigNumber.clone();
+    var Big = BigDecimal.clone();
 
     var x = new Big(0);
     var y = new Big('1');
 
     t(x instanceof Big);
     t(y instanceof Big);
-    t(!(x instanceof BigNumber));
-    t(!(y instanceof BigNumber));
+    t(!(x instanceof BigDecimal));
+    t(!(y instanceof BigDecimal));
 
-    t(BigNumber.isBigNumber(x));
-    t(BigNumber.isBigNumber(y));
+    t(BigDecimal.isBigNumber(x));
+    t(BigDecimal.isBigNumber(y));
 
     t(Big.isBigNumber(x));
     t(Big.isBigNumber(y));
 
-    var z = new BigNumber(x);
+    var z = new BigDecimal(x);
 
-    t(z instanceof BigNumber);
+    t(z instanceof BigDecimal);
     t(!(z instanceof Big));
 
-    t(BigNumber.isBigNumber(z));
+    t(BigDecimal.isBigNumber(z));
     t(Big.isBigNumber(z));
 
     t(x.eq(z));
@@ -40,8 +40,8 @@ Test('clone', function () {
     yy = new AnotherBig('1');
 
     t(xx instanceof AnotherBig);
-    t(!(xx instanceof BigNumber));
-    t(!(yy instanceof BigNumber));
+    t(!(xx instanceof BigDecimal));
+    t(!(yy instanceof BigDecimal));
     t(!(xx instanceof Big));
     t(!(yy instanceof Big));
 
@@ -55,7 +55,7 @@ Test('clone', function () {
 
     t(zz instanceof Big);
     t(!(zz instanceof AnotherBig));
-    t(!(zz instanceof BigNumber));
+    t(!(zz instanceof BigDecimal));
 
     t(zz.eq(x));
     t(zz.eq(xx));

@@ -10,11 +10,11 @@ Test('comparedTo', function () {
     }
 
     function t(a, b, expected) {
-        Test.areEqual(String(expected), String(new BigNumber(a).comparedTo(b)));
+        Test.areEqual(String(expected), String(new BigDecimal(a).comparedTo(b)));
         //Test.areEqual(String(expected), String(new BigNumber(a).comparedTo(new BigNumber(b))));
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -35,10 +35,10 @@ Test('comparedTo', function () {
     t(0, -1, 1);
     t(-0, 1, -1);
     t(-0, -1, 1);
-    Test.areEqual(false, isMinusZero(new BigNumber(0).comparedTo(0)));
-    Test.areEqual(false, isMinusZero(new BigNumber(0).comparedTo(-0)));
-    Test.areEqual(false, isMinusZero(new BigNumber(-0).comparedTo(0)));
-    Test.areEqual(false, isMinusZero(new BigNumber(-0).comparedTo(-0)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(0).comparedTo(0)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(0).comparedTo(-0)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(-0).comparedTo(0)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(-0).comparedTo(-0)));
     t(0, N, n);
     t(-0, N, n);
     t(0, I, -1);
@@ -62,10 +62,10 @@ Test('comparedTo', function () {
     t(-I, -0, -1);
     t(I, N, n);
     t(-I, N, n);
-    Test.areEqual(false, isMinusZero(new BigNumber(I).comparedTo(I)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(I).comparedTo(I)));
     t(I, -I, 1);
     t(-I, I, -1);
-    Test.areEqual(false, isMinusZero(new BigNumber(-I).comparedTo(-I)));
+    Test.areEqual(false, isMinusZero(new BigDecimal(-I).comparedTo(-I)));
 
     t(0, '0.1', '-1');
     t(0, '-0.1', '1');
@@ -4054,5 +4054,5 @@ Test('comparedTo', function () {
     t('-0.10021507', '-2049541544645617700923988306', 1);
     t('6609143733354158875894', '-6609143733354158875894', 1);
 
-    Test.isException(function () {new BigNumber(1).comparedTo('one')}, "new BigNumber(1).comparedTo('one')");
+    Test.isException(function () {new BigDecimal(1).comparedTo('one')}, "new BigNumber(1).comparedTo('one')");
 });

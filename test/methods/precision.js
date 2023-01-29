@@ -3,9 +3,9 @@ if (typeof Test === 'undefined') require('../tester');
 Test('precision', function () {
     var MAX = 1e9;
 
-    Test.areEqual(BigNumber.prototype.sd, BigNumber.prototype.precision);
+    Test.areEqual(BigDecimal.prototype.sd, BigDecimal.prototype.precision);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 7,
         RANGE: 1E9,
@@ -15,7 +15,7 @@ Test('precision', function () {
     // Return significant digit count
 
     var t = function (value, count, includeZeros) {
-        Test.areEqual(count, new BigNumber(value).precision(includeZeros));
+        Test.areEqual(count, new BigDecimal(value).precision(includeZeros));
     }
 
     t(NaN, null);
@@ -66,7 +66,7 @@ Test('precision', function () {
     // Return a new BigNumber with a maximum number of sd significant digits
 
     t = function (expected, value, sd, rm) {
-        Test.areEqual(expected, new BigNumber(value).precision(sd, rm).valueOf());
+        Test.areEqual(expected, new BigDecimal(value).precision(sd, rm).valueOf());
     }
 
     t('0', 0, 1);
@@ -86,9 +86,9 @@ Test('precision', function () {
     t('-0', '-0', 20);
 
     t('123456789.12345678912346789', '123456789.12345678912346789', 26);
-    BigNumber.config({ ROUNDING_MODE: 0 });
+    BigDecimal.config({ ROUNDING_MODE: 0 });
     t('123456789.12345678912346789', '123456789.12345678912346789', 26);
-    BigNumber.config({ ROUNDING_MODE: 1 });
+    BigDecimal.config({ ROUNDING_MODE: 1 });
     t('123456789.12345678912346789', '123456789.12345678912346789', 26);
 
     t('4937809340236234102130.947044664011', '4937809340236234102130.947044664011', 35, 0);
@@ -3697,55 +3697,55 @@ Test('precision', function () {
     t('366763985061296627375995000000000000000000000000000000000000000', '366763985061296627375994988520498401354427141647683539962362297.823510352274776652694253563878392985469220455118158824859937764475089228072088702703863070436530913536177584336650185707427759022894822571', 24, 5);
     t('7483978023392620879223025348065115057653025858013483463606682807652114675009756211425640344986476725604422263784508630866327980720727327697183007274924845457864758981447718084335691255091414929451655538943143277846.270484986861', '7483978023392620879223025348065115057653025858013483463606682807652114675009756211425640344986476725604422263784508630866327980720727327697183007274924845457864758981447718084335691255091414929451655538943143277846.270484986861458493444574936108272', 226, 5);
 
-    Test.isException(function () {new BigNumber('12.345').precision(NaN)}, ".precision(NaN)");
-    Test.isException(function () {new BigNumber('12.345').precision('NaN')}, ".precision('NaN')");
-    Test.isException(function () {new BigNumber('12.345').precision([])}, ".precision([])");
-    Test.isException(function () {new BigNumber('12.345').precision({})}, ".precision({})");
-    Test.isException(function () {new BigNumber('12.345').precision('')}, ".precision('')");
-    Test.isException(function () {new BigNumber('12.345').precision(' ')}, ".precision(' ')");
-    Test.isException(function () {new BigNumber('12.345').precision('hello')}, ".precision('hello')");
-    Test.isException(function () {new BigNumber('12.345').precision('\t')}, ".precision('\t')");
-    Test.isException(function () {new BigNumber('12.345').precision(new Date)}, ".precision(new Date)");
-    Test.isException(function () {new BigNumber('12.345').precision(new RegExp)}, ".precision(new RegExp)");
-    Test.isException(function () {new BigNumber('12.345').precision(7.5)}, ".precision(7.5)");
-    Test.isException(function () {new BigNumber('12.345').precision('-1.1e1')}, ".precision('-1.1e1')");
-    Test.isException(function () {new BigNumber('12.345').precision(0, 1)}, ".precision(0, 1)");
-    Test.isException(function () {new BigNumber('12.345').precision('0')}, ".precision('0')");
-    Test.isException(function () {new BigNumber('12.345').precision('-1')}, ".precision('-1')");
-    Test.isException(function () {new BigNumber('12.345').precision(-23)}, ".precision(-23)");
-    Test.isException(function () {new BigNumber('12.345').precision(MAX + 1)}, ".precision(MAX + 1)");
-    Test.isException(function () {new BigNumber('12.345').precision(MAX + 0.1)}, ".precision(MAX + 0.1)");
-    Test.isException(function () {new BigNumber('12.345').precision('-0.01')}, ".precision('-0.01')");
-    Test.isException(function () {new BigNumber('12.345').precision('-1e-1')}, ".precision('-1e-1')");
-    Test.isException(function () {new BigNumber('12.345').precision(Infinity)}, ".precision(Infinity)");
-    Test.isException(function () {new BigNumber('12.345').precision('-Infinity')}, ".precision('-Infinity')");
+    Test.isException(function () {new BigDecimal('12.345').precision(NaN)}, ".precision(NaN)");
+    Test.isException(function () {new BigDecimal('12.345').precision('NaN')}, ".precision('NaN')");
+    Test.isException(function () {new BigDecimal('12.345').precision([])}, ".precision([])");
+    Test.isException(function () {new BigDecimal('12.345').precision({})}, ".precision({})");
+    Test.isException(function () {new BigDecimal('12.345').precision('')}, ".precision('')");
+    Test.isException(function () {new BigDecimal('12.345').precision(' ')}, ".precision(' ')");
+    Test.isException(function () {new BigDecimal('12.345').precision('hello')}, ".precision('hello')");
+    Test.isException(function () {new BigDecimal('12.345').precision('\t')}, ".precision('\t')");
+    Test.isException(function () {new BigDecimal('12.345').precision(new Date)}, ".precision(new Date)");
+    Test.isException(function () {new BigDecimal('12.345').precision(new RegExp)}, ".precision(new RegExp)");
+    Test.isException(function () {new BigDecimal('12.345').precision(7.5)}, ".precision(7.5)");
+    Test.isException(function () {new BigDecimal('12.345').precision('-1.1e1')}, ".precision('-1.1e1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(0, 1)}, ".precision(0, 1)");
+    Test.isException(function () {new BigDecimal('12.345').precision('0')}, ".precision('0')");
+    Test.isException(function () {new BigDecimal('12.345').precision('-1')}, ".precision('-1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(-23)}, ".precision(-23)");
+    Test.isException(function () {new BigDecimal('12.345').precision(MAX + 1)}, ".precision(MAX + 1)");
+    Test.isException(function () {new BigDecimal('12.345').precision(MAX + 0.1)}, ".precision(MAX + 0.1)");
+    Test.isException(function () {new BigDecimal('12.345').precision('-0.01')}, ".precision('-0.01')");
+    Test.isException(function () {new BigDecimal('12.345').precision('-1e-1')}, ".precision('-1e-1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(Infinity)}, ".precision(Infinity)");
+    Test.isException(function () {new BigDecimal('12.345').precision('-Infinity')}, ".precision('-Infinity')");
 
     t('12.3', '12.345', 3);
     t('12.34567891', '12.3456789123456789', 10);
 
-    Test.isException(function () {new BigNumber('12.345').precision(1, NaN)}, ".precision(1, NaN)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, 'NaN')}, ".precision(1, 'NaN')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, [])}, ".precision(1, [])");
-    Test.isException(function () {new BigNumber('12.345').precision(1, {})}, ".precision(1, {})");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '')}, ".precision(1, '')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, ' ')}, ".precision(1, ' ')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, 'hello')}, ".precision(1, 'hello')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '\t')}, ".precision(1, '\t')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, new Date)}, ".precision(1, new Date)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, new RegExp)}, ".precision(1, new RegExp)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, 7.5)}, ".precision(1, 7.5)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, 9)}, ".precision(1, 9)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '-1.1e1')}, ".precision(1, '-1.1e1')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '-1')}, ".precision(1, '-1')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, -23)}, ".precision(1, -23)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, MAX + 1)}, ".precision(1, MAX + 1)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, MAX + 0.1)}, ".precision(1, MAX + 0.1)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '-0.01')}, ".precision(1, '-0.01')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '-1e-1')}, ".precision(1, '-1e-1')");
-    Test.isException(function () {new BigNumber('12.345').precision(1, Infinity)}, ".precision(1, Infinity)");
-    Test.isException(function () {new BigNumber('12.345').precision(1, '-Infinity')}, ".precision(1, '-Infinity')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, NaN)}, ".precision(1, NaN)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, 'NaN')}, ".precision(1, 'NaN')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, [])}, ".precision(1, [])");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, {})}, ".precision(1, {})");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '')}, ".precision(1, '')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, ' ')}, ".precision(1, ' ')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, 'hello')}, ".precision(1, 'hello')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '\t')}, ".precision(1, '\t')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, new Date)}, ".precision(1, new Date)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, new RegExp)}, ".precision(1, new RegExp)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, 7.5)}, ".precision(1, 7.5)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, 9)}, ".precision(1, 9)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '-1.1e1')}, ".precision(1, '-1.1e1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '-1')}, ".precision(1, '-1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, -23)}, ".precision(1, -23)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, MAX + 1)}, ".precision(1, MAX + 1)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, MAX + 0.1)}, ".precision(1, MAX + 0.1)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '-0.01')}, ".precision(1, '-0.01')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '-1e-1')}, ".precision(1, '-1e-1')");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, Infinity)}, ".precision(1, Infinity)");
+    Test.isException(function () {new BigDecimal('12.345').precision(1, '-Infinity')}, ".precision(1, '-Infinity')");
 
-    BigNumber.config({ EXPONENTIAL_AT: 0});
+    BigDecimal.config({ EXPONENTIAL_AT: 0});
 
     t('-7.66e+6070140', '-7.66E+6070140', 4, 0);
     t('-7.9674989422401853010973497105652818e-8963939', '-7.9674989422401853010973497105652818966315450635741064116E-8963939', 35, 1);

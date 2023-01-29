@@ -3,12 +3,12 @@ if (typeof Test === 'undefined') require('../tester');
 Test('exponentiatedBy', function () {
 
     var t = function (expected, n, exp) {
-        Test.areEqual(expected, new BigNumber(n).exponentiatedBy(exp).valueOf());
+        Test.areEqual(expected, new BigDecimal(n).exponentiatedBy(exp).valueOf());
     };
 
-    Test.areEqual(BigNumber.prototype.exponentiatedBy, BigNumber.prototype.pow);
+    Test.areEqual(BigDecimal.prototype.exponentiatedBy, BigDecimal.prototype.pow);
 
-    BigNumber.config({
+    BigDecimal.config({
         POW_PRECISION: 0,
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
@@ -690,7 +690,7 @@ Test('exponentiatedBy', function () {
     t('2.18753957001465798602093911444285519704647324430365134831536108015616e+44', '4954.46', 12);
     */
 
-    BigNumber.config({EXPONENTIAL_AT: 0});
+    BigDecimal.config({EXPONENTIAL_AT: 0});
 
     t('2e+0', 2, 1);
     t('1.6e+1', 2, 4);
@@ -826,44 +826,44 @@ Test('exponentiatedBy', function () {
     t('1.1504940871276742926708823617505372960241390892442547940194260102743306128298973371802547471453755938653944600792141533514422490556963535378521856840746722206160260148176604222079226186281680715577736316488196108040509176925372372483300649927835887344415603493563915019264675154039059770309142781930141352329958156926976e+15', '-8.7358521345995835476', 16);
     */
 
-    BigNumber.config({DECIMAL_PLACES: 1000});
+    BigDecimal.config({DECIMAL_PLACES: 1000});
 
     t('5.5626846462680034577255817933310101605480399511558295763833185422180110870347954896357078975312775514101683493275895275128810854038836502721400309634442970528269449838300058261990253686064590901798039126173562593355209381270166265416453973718012279499214790991212515897719252957621869994522193843748736289511290126272884996414561770466127838448395124802899527144151299810833802858809753719892490239782222290074816037776586657834841586939662825734294051183140794537141608771803070715941051121170285190347786926570042246331102750604036185540464179153763503857127117918822547579033069472418242684328083352174724579376695971173152319349449321466491373527284227385153411689217559966957882267024615e-309', 2, -1024);
 
-    BigNumber.config({EXPONENTIAL_AT: 1000});
+    BigDecimal.config({EXPONENTIAL_AT: 1000});
 
     t('179769313486231590772930519078902473361797697894230657273430081157732675805500963132708477322407536021120113879871393357658789768814416622492847430639474124377767893424865485276302219601246094119453082952085005768838150682342462881473913110540827237163350510684586298239947245938479716304835356329624224137216', 2, 1024);
 
-    Test.isException(function () {new BigNumber(2).pow(4.4)}, ".pow(4.4)");
-    Test.isException(function () {new BigNumber(2).pow('5.5')}, ".pow('5.5')");
-    Test.isException(function () {new BigNumber(2).pow(-2.1)}, ".pow(-2.1)");
-    Test.isException(function () {new BigNumber(2).pow('-11.5')}, ".pow('-11.5')");
-    Test.isException(function () {new BigNumber(2).pow(0.99)}, ".pow(0.99)");
-    Test.isException(function () {new BigNumber(2).pow('-0.044e2')}, ".pow('-0.044e2')");
+    Test.isException(function () {new BigDecimal(2).pow(4.4)}, ".pow(4.4)");
+    Test.isException(function () {new BigDecimal(2).pow('5.5')}, ".pow('5.5')");
+    Test.isException(function () {new BigDecimal(2).pow(-2.1)}, ".pow(-2.1)");
+    Test.isException(function () {new BigDecimal(2).pow('-11.5')}, ".pow('-11.5')");
+    Test.isException(function () {new BigDecimal(2).pow(0.99)}, ".pow(0.99)");
+    Test.isException(function () {new BigDecimal(2).pow('-0.044e2')}, ".pow('-0.044e2')");
 
-    Test.isException(function () {new BigNumber('12.345').pow(undefined)}, ".pow(undefined)");
-    Test.isException(function () {new BigNumber('12.345').pow(null)}, ".pow(null)");
-    Test.isException(function () {new BigNumber('12.345').pow(true)}, ".pow(true)");
-    Test.isException(function () {new BigNumber('12.345').pow(false)}, ".pow(false)");
-    Test.isException(function () {new BigNumber('12.345').pow([])}, ".pow([])");
-    Test.isException(function () {new BigNumber('12.345').pow({})}, ".pow({})");
-    Test.isException(function () {new BigNumber('12.345').pow('')}, ".pow('')");
-    Test.isException(function () {new BigNumber('12.345').pow(' ')}, ".pow(' ')");
-    Test.isException(function () {new BigNumber('12.345').pow('2.66e+1')}, ".pow('2.66e+1')");
-    Test.isException(function () {new BigNumber('12.345').pow('4e')}, ".pow('4e')");
-    Test.isException(function () {new BigNumber('12.345').pow('hello')}, ".pow('hello')");
-    Test.isException(function () {new BigNumber('12.345').pow('\t')}, ".pow('\t')");
-    Test.isException(function () {new BigNumber('12.345').pow(new Date)}, ".pow(new Date)");
-    Test.isException(function () {new BigNumber('12.345').pow(new RegExp)}, ".pow(new RegExp)");
-    Test.isException(function () {new BigNumber('12.345').pow(function (){})}, ".pow(function (){})");
-    Test.isException(function () {new BigNumber('12.345').pow(7.5)}, ".pow(7.5)");
-    Test.isException(function () {new BigNumber('12.345').pow('-1.123e1')}, ".pow('-1.123e1')");
-    Test.isException(function () {new BigNumber('12.345').pow('-0.01')}, ".pow('-0.01')");
-    Test.isException(function () {new BigNumber('12.345').pow('-1e-1')}, ".pow('-1e-1')");
+    Test.isException(function () {new BigDecimal('12.345').pow(undefined)}, ".pow(undefined)");
+    Test.isException(function () {new BigDecimal('12.345').pow(null)}, ".pow(null)");
+    Test.isException(function () {new BigDecimal('12.345').pow(true)}, ".pow(true)");
+    Test.isException(function () {new BigDecimal('12.345').pow(false)}, ".pow(false)");
+    Test.isException(function () {new BigDecimal('12.345').pow([])}, ".pow([])");
+    Test.isException(function () {new BigDecimal('12.345').pow({})}, ".pow({})");
+    Test.isException(function () {new BigDecimal('12.345').pow('')}, ".pow('')");
+    Test.isException(function () {new BigDecimal('12.345').pow(' ')}, ".pow(' ')");
+    Test.isException(function () {new BigDecimal('12.345').pow('2.66e+1')}, ".pow('2.66e+1')");
+    Test.isException(function () {new BigDecimal('12.345').pow('4e')}, ".pow('4e')");
+    Test.isException(function () {new BigDecimal('12.345').pow('hello')}, ".pow('hello')");
+    Test.isException(function () {new BigDecimal('12.345').pow('\t')}, ".pow('\t')");
+    Test.isException(function () {new BigDecimal('12.345').pow(new Date)}, ".pow(new Date)");
+    Test.isException(function () {new BigDecimal('12.345').pow(new RegExp)}, ".pow(new RegExp)");
+    Test.isException(function () {new BigDecimal('12.345').pow(function (){})}, ".pow(function (){})");
+    Test.isException(function () {new BigDecimal('12.345').pow(7.5)}, ".pow(7.5)");
+    Test.isException(function () {new BigDecimal('12.345').pow('-1.123e1')}, ".pow('-1.123e1')");
+    Test.isException(function () {new BigDecimal('12.345').pow('-0.01')}, ".pow('-0.01')");
+    Test.isException(function () {new BigDecimal('12.345').pow('-1e-1')}, ".pow('-1e-1')");
 
     // As negative exponents involve a division, the result depends on the decimal places and rounding mode specified:
 
-    BigNumber.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 0, EXPONENTIAL_AT: 0});
+    BigDecimal.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 0, EXPONENTIAL_AT: 0});
 
     t('-5.196101e-14', '-453.8', -5);
     t('1e-20', '8308633', -17);
@@ -887,7 +887,7 @@ Test('exponentiatedBy', function () {
     t('-1e-20', '-83591', -9);
     t('1e-20', '457.54', -29);
 
-    BigNumber.config({DECIMAL_PLACES: 40, ROUNDING_MODE: 1});
+    BigDecimal.config({DECIMAL_PLACES: 40, ROUNDING_MODE: 1});
 
     t('0e+0', '41', -25);
     t('-0e+0', '-26403', -25);
@@ -910,7 +910,7 @@ Test('exponentiatedBy', function () {
     t('2.11e-38', '-5855.32565', -10);
     t('0e+0', '-3338', -20);
 
-    BigNumber.config({DECIMAL_PLACES: 2, ROUNDING_MODE: 2});
+    BigDecimal.config({DECIMAL_PLACES: 2, ROUNDING_MODE: 2});
 
     t('1e-2', '95636', -15);
     t('1e-2', '802.942', -28);
@@ -933,7 +933,7 @@ Test('exponentiatedBy', function () {
     t('1e-2', '4695.5', -19);
     t('-0e+0', '-198', -25);
 
-    BigNumber.config({DECIMAL_PLACES: 50, ROUNDING_MODE: 3});
+    BigDecimal.config({DECIMAL_PLACES: 50, ROUNDING_MODE: 3});
 
     t('2.5224883818467056168924068720414334436865e-10', '-62963', -2);
     t('0e+0', '231061', -19);
@@ -956,7 +956,7 @@ Test('exponentiatedBy', function () {
     t('-4e-50', '-226', -21);
     t('0e+0', '6584.1', -26);
 
-    BigNumber.config({DECIMAL_PLACES: 101, ROUNDING_MODE: 4});
+    BigDecimal.config({DECIMAL_PLACES: 101, ROUNDING_MODE: 4});
 
     t('2.59086221967070203169073279093835370593438251373865163612424184820637293172653704e-21', '7280902.7', -3);
     t('0e+0', '-864898946', -18);
@@ -979,7 +979,7 @@ Test('exponentiatedBy', function () {
     t('-0e+0', '-62548432.8', -25);
     t('1.2208830071779439347812238188621035387222053043582168736013775635140091964690008930489382362e-10', '-90503', -2);
 
-    BigNumber.config({DECIMAL_PLACES: 77, ROUNDING_MODE: 5});
+    BigDecimal.config({DECIMAL_PLACES: 77, ROUNDING_MODE: 5});
 
     t('0e+0', '66772.53301', -27);
     t('3.40661780943015419152e-57', '368.73348', -22);
@@ -1002,7 +1002,7 @@ Test('exponentiatedBy', function () {
     t('7.1812368392200578e-61', '-5741', -16);
     t('-4.13699730669298062229277514676940165486322151495730381776e-21', '-71.29', -11);
 
-    BigNumber.config({DECIMAL_PLACES: 99, ROUNDING_MODE: 6});
+    BigDecimal.config({DECIMAL_PLACES: 99, ROUNDING_MODE: 6});
 
     t('3.50565137890907848896561225350273375702045873464e-52', '282', -21);
     t('2.5679471225603104166379068675724780241775210532444313569170923793768408333314758e-20', '91', -10);
@@ -1077,17 +1077,17 @@ Test('exponentiatedBy', function () {
     t('0e+0', '262233', -24);
     */
 
-    BigNumber.config({DECIMAL_PLACES: 0, ROUNDING_MODE: 6});
+    BigDecimal.config({DECIMAL_PLACES: 0, ROUNDING_MODE: 6});
 
     t('0e+0', '-8645', -30);
     t('0e+0', '7.24173993', -23);
 
     // With modulus
 
-    BigNumber.config({EXPONENTIAL_AT: 1E9, DECIMAL_PLACES: 17, ROUNDING_MODE: 4});
+    BigDecimal.config({EXPONENTIAL_AT: 1E9, DECIMAL_PLACES: 17, ROUNDING_MODE: 4});
 
     t = function (expected, n, exp, mod) {
-        Test.areEqual(expected, new BigNumber(n).exponentiatedBy(exp, mod).valueOf());
+        Test.areEqual(expected, new BigDecimal(n).exponentiatedBy(exp, mod).valueOf());
     };
 
     t('-0', '-1', -1, '-1');

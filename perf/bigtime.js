@@ -138,7 +138,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
             '\n E.g.   node bigtime m add');
 } else {
 
-    BigNumber.config({
+    BigDecimal.config({
         EXPONENTIAL_AT: 1E9,
         RANGE: 1E9,
         ERRORS: false,
@@ -194,7 +194,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
     if (bdM == 'divide') {
         rounding = Math.floor(Math.random() * 7);
         console.log('\n Decimal places: %d\n Rounding mode: %d', decimalPlaces, rounding);
-        BigNumber.config({ DECIMAL_PLACES: decimalPlaces, ROUNDING_MODE: rounding });
+        BigDecimal.config({ DECIMAL_PLACES: decimalPlaces, ROUNDING_MODE: rounding });
     }
 
     process.stdout.write('\n Testing started');
@@ -270,7 +270,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
 
             start = +new Date();
             for (i = 0; i < j; i++) {
-                bnRs[i] = new BigNumber(xs[i])[bnM](ys[i]);
+                bnRs[i] = new BigDecimal(xs[i])[bnM](ys[i]);
             }
             bnT = +new Date() - start;
 
@@ -278,7 +278,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
 
             start = +new Date();
             for (i = 0; i < j; i++) {
-                bnRs[i] = new BigNumber(xs[i])[bnM]();
+                bnRs[i] = new BigDecimal(xs[i])[bnM]();
             }
             bnT = +new Date() - start;
 
@@ -286,7 +286,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
 
             start = +new Date();
             for (i = 0; i < j; i++) {
-                bnRs[i] = new BigNumber(xs[i])[bnM](new BigNumber(ys[i]));
+                bnRs[i] = new BigDecimal(xs[i])[bnM](new BigDecimal(ys[i]));
             }
             bnT = +new Date() - start;
 

@@ -3,7 +3,7 @@ if (typeof Test === 'undefined') require('../tester');
 Test('toFormat', function () {
 
     function t(expected, value, dp){
-        Test.areEqual(expected, new BigNumber(value).toFormat(dp));
+        Test.areEqual(expected, new BigDecimal(value).toFormat(dp));
     }
 
     var format = {
@@ -15,7 +15,7 @@ Test('toFormat', function () {
         fractionGroupSize: 0
     };
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -143,7 +143,7 @@ Test('toFormat', function () {
         secondaryGroupSize: 2
     };
 
-    BigNumber.config({ FORMAT: format });
+    BigDecimal.config({ FORMAT: format });
 
     t('9,876.54321', 9876.54321);
     t('10,00,037.123', '1000037.123456789', 3);

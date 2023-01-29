@@ -6,11 +6,11 @@ Test('minus', function () {
         I = 'Infinity';
 
     function t(minuend, subtrahend, expected) {
-        Test.areEqual(String(expected), String(new BigNumber(minuend).minus(subtrahend)));
+        Test.areEqual(String(expected), String(new BigDecimal(minuend).minus(subtrahend)));
         //Test.areEqual(String(expected), String(new BigNumber(minuend).minus(new BigNumber(subtrahend))));
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -38,21 +38,21 @@ Test('minus', function () {
     //  except roundTowardNegative; under that attribute, the sign of an exact
     //  difference shall be −0.
     //  However, x + x = x −(−x) retains the same sign as x even when x is zero.
-    BigNumber.config( {ROUNDING_MODE: 3} );
-    Test.areEqual('0', new BigNumber(0).minus(-0).valueOf());       //   0 - -0 =  0
-    Test.areEqual('-0', new BigNumber(-0).minus(0).valueOf());      //  -0 -  0 = -0
-    Test.areEqual('-0', new BigNumber(0).minus(0).valueOf());       //   0 -  0 = -0
-    Test.areEqual('-0', new BigNumber(-0).minus(-0).valueOf());     //  -0 - -0 = -0
-    Test.areEqual('-0', new BigNumber(1).minus(1).valueOf());       //   1 -  1 = -0
-    Test.areEqual('-0', new BigNumber(-1).minus(-1).valueOf());     //  -1 - -1 = -0
+    BigDecimal.config( {ROUNDING_MODE: 3} );
+    Test.areEqual('0', new BigDecimal(0).minus(-0).valueOf());       //   0 - -0 =  0
+    Test.areEqual('-0', new BigDecimal(-0).minus(0).valueOf());      //  -0 -  0 = -0
+    Test.areEqual('-0', new BigDecimal(0).minus(0).valueOf());       //   0 -  0 = -0
+    Test.areEqual('-0', new BigDecimal(-0).minus(-0).valueOf());     //  -0 - -0 = -0
+    Test.areEqual('-0', new BigDecimal(1).minus(1).valueOf());       //   1 -  1 = -0
+    Test.areEqual('-0', new BigDecimal(-1).minus(-1).valueOf());     //  -1 - -1 = -0
 
-    BigNumber.config( {ROUNDING_MODE: 4} );
-    Test.areEqual('0', new BigNumber(0).minus(-0).valueOf());       //   0 - -0 =  0
-    Test.areEqual('-0', new BigNumber(-0).minus(0).valueOf());      //  -0 -  0 = -0
-    Test.areEqual('0', new BigNumber(0).minus(0).valueOf());        //   0 -  0 =  0
-    Test.areEqual('0', new BigNumber(-0).minus(-0).valueOf());      //  -0 - -0 =  0
-    Test.areEqual('0', new BigNumber(1).minus(1).valueOf());        //   1 -  1 =  0
-    Test.areEqual('0', new BigNumber(-1).minus(-1).valueOf());      //  -1 - -1 =  0
+    BigDecimal.config( {ROUNDING_MODE: 4} );
+    Test.areEqual('0', new BigDecimal(0).minus(-0).valueOf());       //   0 - -0 =  0
+    Test.areEqual('-0', new BigDecimal(-0).minus(0).valueOf());      //  -0 -  0 = -0
+    Test.areEqual('0', new BigDecimal(0).minus(0).valueOf());        //   0 -  0 =  0
+    Test.areEqual('0', new BigDecimal(-0).minus(-0).valueOf());      //  -0 - -0 =  0
+    Test.areEqual('0', new BigDecimal(1).minus(1).valueOf());        //   1 -  1 =  0
+    Test.areEqual('0', new BigDecimal(-1).minus(-1).valueOf());      //  -1 - -1 =  0
 
     t(0, N, N);
     t(-0, N, N);

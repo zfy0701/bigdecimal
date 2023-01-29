@@ -3,12 +3,12 @@ if (typeof Test === 'undefined') require('../tester');
 Test('absoluteValue', function () {
 
     function t(expected, value){
-        Test.areEqual(String(expected), new BigNumber(String(value)).absoluteValue().toString());
+        Test.areEqual(String(expected), new BigDecimal(String(value)).absoluteValue().toString());
     }
 
-    Test.areEqual(BigNumber.prototype.absoluteValue, BigNumber.prototype.abs);
+    Test.areEqual(BigDecimal.prototype.absoluteValue, BigDecimal.prototype.abs);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -31,9 +31,9 @@ Test('absoluteValue', function () {
     t(123456.7891011, -123456.7891011);
     t(999.999, '-999.999');
     t(99, 99);
-    t(1, new BigNumber(-1));
-    t(0.001, new BigNumber(0.001));
-    t(0.001, new BigNumber('-0.001'));
+    t(1, new BigDecimal(-1));
+    t(0.001, new BigDecimal(0.001));
+    t(0.001, new BigDecimal('-0.001'));
 
     t('Infinity', Infinity);
     t('Infinity', -Infinity);
@@ -48,14 +48,14 @@ Test('absoluteValue', function () {
     t(0, -0);
     t(0, minusZero);
 
-    Test.areEqual('-0', new BigNumber('-0').valueOf());
-    Test.areEqual('-0', new BigNumber(-0).valueOf());
-    Test.areEqual('-0', new BigNumber(minusZero).valueOf());
-    Test.areEqual('0', new BigNumber(-0).abs().valueOf());
-    Test.areEqual('0', new BigNumber(minusZero).abs().valueOf());
-    Test.areEqual('0', new BigNumber('-0').abs().valueOf());
+    Test.areEqual('-0', new BigDecimal('-0').valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).valueOf());
+    Test.areEqual('-0', new BigDecimal(minusZero).valueOf());
+    Test.areEqual('0', new BigDecimal(-0).abs().valueOf());
+    Test.areEqual('0', new BigDecimal(minusZero).abs().valueOf());
+    Test.areEqual('0', new BigDecimal('-0').abs().valueOf());
 
-    BigNumber.config({EXPONENTIAL_AT: 100});
+    BigDecimal.config({EXPONENTIAL_AT: 100});
 
     t(Number.MIN_VALUE, Number.MIN_VALUE);
     t(Number.MIN_VALUE, -Number.MIN_VALUE);
@@ -84,7 +84,7 @@ Test('absoluteValue', function () {
     t(two_31 - 1, two_31 - 1);
     t(two_31 - 1, -two_31 + 1);
 
-    BigNumber.config({ EXPONENTIAL_AT: [-7, 21] });
+    BigDecimal.config({ EXPONENTIAL_AT: [-7, 21] });
 
     t(NaN, 'NaN');
     t('0', '0');
@@ -504,7 +504,7 @@ Test('absoluteValue', function () {
     t('93.6206', '93.6206');
     t('3.07e-18', '0.00000000000000000307');
 
-    BigNumber.config({EXPONENTIAL_AT: 0});
+    BigDecimal.config({EXPONENTIAL_AT: 0});
 
     t('5.2452468128e+1', '-5.2452468128e+1');
     t('1.41525905257189365008396e+16', '1.41525905257189365008396e+16');

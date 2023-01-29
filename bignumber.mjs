@@ -72,8 +72,8 @@ var
  */
 function clone(configObject) {
   var div, convertBase, parseNumeric,
-    P = BigNumber.prototype = { constructor: BigNumber, toString: null, valueOf: null },
-    ONE = new BigNumber(1),
+    P = BigDecimal.prototype = { constructor: BigDecimal, toString: null, valueOf: null },
+    ONE = new BigDecimal(1),
 
 
     //----------------------------- EDITABLE CONFIG DEFAULTS -------------------------------
@@ -176,12 +176,12 @@ function clone(configObject) {
    * v {number|string|BigNumber} A numeric value.
    * [b] {number} The base of v. Integer, 2 to ALPHABET.length inclusive.
    */
-  function BigNumber(v, b) {
+  function BigDecimal(v, b) {
     var alphabet, c, caseChanged, e, i, isNum, len, str,
       x = this;
 
     // Enable constructor call without `new`.
-    if (!(x instanceof BigNumber)) return new BigNumber(v, b);
+    if (!(x instanceof BigDecimal)) return new BigDecimal(v, b);
 
     if (b == null) {
 
@@ -251,7 +251,7 @@ function clone(configObject) {
       // Allow exponential notation to be used with base 10 argument, while
       // also rounding to DECIMAL_PLACES as with other bases.
       if (b == 10 && alphabetHasNormalDecimalDigits) {
-        x = new BigNumber(v);
+        x = new BigDecimal(v);
         return round(x, DECIMAL_PLACES + x.e + 1, ROUNDING_MODE);
       }
 
@@ -265,7 +265,7 @@ function clone(configObject) {
         x.s = 1 / v < 0 ? (str = str.slice(1), -1) : 1;
 
         // '[BigNumber Error] Number primitive has more than 15 significant digits: {n}'
-        if (BigNumber.DEBUG && str.replace(/^0\.0*|\./, '').length > 15) {
+        if (BigDecimal.DEBUG && str.replace(/^0\.0*|\./, '').length > 15) {
           throw Error
            (tooManyDigits + v);
         }
@@ -322,7 +322,7 @@ function clone(configObject) {
       len -= i;
 
       // '[BigNumber Error] Number primitive has more than 15 significant digits: {n}'
-      if (isNum && BigNumber.DEBUG &&
+      if (isNum && BigDecimal.DEBUG &&
         len > 15 && (v > MAX_SAFE_INTEGER || v !== mathfloor(v))) {
           throw Error
            (tooManyDigits + (x.s * v));
@@ -376,18 +376,18 @@ function clone(configObject) {
   // CONSTRUCTOR PROPERTIES
 
 
-  BigNumber.clone = clone;
+  BigDecimal.clone = clone;
 
-  BigNumber.ROUND_UP = 0;
-  BigNumber.ROUND_DOWN = 1;
-  BigNumber.ROUND_CEIL = 2;
-  BigNumber.ROUND_FLOOR = 3;
-  BigNumber.ROUND_HALF_UP = 4;
-  BigNumber.ROUND_HALF_DOWN = 5;
-  BigNumber.ROUND_HALF_EVEN = 6;
-  BigNumber.ROUND_HALF_CEIL = 7;
-  BigNumber.ROUND_HALF_FLOOR = 8;
-  BigNumber.EUCLID = 9;
+  BigDecimal.ROUND_UP = 0;
+  BigDecimal.ROUND_DOWN = 1;
+  BigDecimal.ROUND_CEIL = 2;
+  BigDecimal.ROUND_FLOOR = 3;
+  BigDecimal.ROUND_HALF_UP = 4;
+  BigDecimal.ROUND_HALF_DOWN = 5;
+  BigDecimal.ROUND_HALF_EVEN = 6;
+  BigDecimal.ROUND_HALF_CEIL = 7;
+  BigDecimal.ROUND_HALF_FLOOR = 8;
+  BigDecimal.EUCLID = 9;
 
 
   /*
@@ -424,7 +424,7 @@ function clone(configObject) {
    *
    * Return an object with the properties current values.
    */
-  BigNumber.config = BigNumber.set = function (obj) {
+  BigDecimal.config = BigDecimal.set = function (obj) {
     var p, v;
 
     if (obj != null) {
@@ -581,9 +581,9 @@ function clone(configObject) {
    *
    * '[BigNumber Error] Invalid BigNumber: {v}'
    */
-  BigNumber.isBigNumber = function (v) {
+  BigDecimal.isBigNumber = function (v) {
     if (!v || v._isBigNumber !== true) return false;
-    if (!BigNumber.DEBUG) return true;
+    if (!BigDecimal.DEBUG) return true;
 
     var i, n,
       c = v.c,
@@ -633,7 +633,7 @@ function clone(configObject) {
    *
    * arguments {number|string|BigNumber}
    */
-  BigNumber.maximum = BigNumber.max = function () {
+  BigDecimal.maximum = BigDecimal.max = function () {
     return maxOrMin(arguments, P.lt);
   };
 
@@ -643,7 +643,7 @@ function clone(configObject) {
    *
    * arguments {number|string|BigNumber}
    */
-  BigNumber.minimum = BigNumber.min = function () {
+  BigDecimal.minimum = BigDecimal.min = function () {
     return maxOrMin(arguments, P.gt);
   };
 
@@ -658,7 +658,7 @@ function clone(configObject) {
    * '[BigNumber Error] Argument {not a primitive number|not an integer|out of range}: {dp}'
    * '[BigNumber Error] crypto unavailable'
    */
-  BigNumber.random = (function () {
+  BigDecimal.random = (function () {
     var pow2_53 = 0x20000000000000;
 
     // Return a 53 bit integer n, where 0 <= n < 9007199254740992.
@@ -674,7 +674,7 @@ function clone(configObject) {
       var a, b, e, k, v,
         i = 0,
         c = [],
-        rand = new BigNumber(ONE);
+        rand = new BigDecimal(ONE);
 
       if (dp == null) dp = DECIMAL_PLACES;
       else intCheck(dp, 0, MAX);
@@ -797,10 +797,10 @@ function clone(configObject) {
    *
    * arguments {number|string|BigNumber}
    */
-  BigNumber.sum = function () {
+  BigDecimal.sum = function () {
     var i = 1,
       args = arguments,
-      sum = new BigNumber(args[0]);
+      sum = new BigDecimal(args[0]);
     for (; i < args.length;) sum = sum.plus(args[i++]);
     return sum;
   };
@@ -859,7 +859,7 @@ function clone(configObject) {
         // Unlimited precision.
         POW_PRECISION = 0;
         str = str.replace('.', '');
-        y = new BigNumber(baseIn);
+        y = new BigDecimal(baseIn);
         x = y.pow(str.length - i);
         POW_PRECISION = k;
 
@@ -1029,7 +1029,7 @@ function clone(configObject) {
       // Either NaN, Infinity or 0?
       if (!xc || !xc[0] || !yc || !yc[0]) {
 
-        return new BigNumber(
+        return new BigDecimal(
 
          // Return NaN if either NaN, or both Infinity or 0.
          !x.s || !y.s || (xc ? yc && xc[0] == yc[0] : !yc) ? NaN :
@@ -1039,7 +1039,7 @@ function clone(configObject) {
        );
       }
 
-      q = new BigNumber(s);
+      q = new BigDecimal(s);
       qc = q.c = [];
       e = x.e - y.e;
       s = dp + e + 1;
@@ -1246,7 +1246,7 @@ function clone(configObject) {
        ? toExponential(str, ne)
        : toFixedPoint(str, ne, '0');
     } else {
-      n = round(new BigNumber(n), i, rm);
+      n = round(new BigDecimal(n), i, rm);
 
       // n.e may have changed if the value was rounded up.
       e = n.e;
@@ -1291,10 +1291,10 @@ function clone(configObject) {
   function maxOrMin(args, method) {
     var n,
       i = 1,
-      m = new BigNumber(args[0]);
+      m = new BigDecimal(args[0]);
 
     for (; i < args.length; i++) {
-      n = new BigNumber(args[i]);
+      n = new BigDecimal(args[i]);
 
       // If any number is NaN, return NaN.
       if (!n.s) {
@@ -1374,12 +1374,12 @@ function clone(configObject) {
             s = s.replace(dotAfter, '$1').replace(dotBefore, '0.$1');
           }
 
-          if (str != s) return new BigNumber(s, base);
+          if (str != s) return new BigDecimal(s, base);
         }
 
         // '[BigNumber Error] Not a number: {n}'
         // '[BigNumber Error] Not a base {b} number: {n}'
-        if (BigNumber.DEBUG) {
+        if (BigDecimal.DEBUG) {
           throw Error
             (bignumberError + 'Not a' + (b ? ' base ' + b : '') + ' number: ' + str);
         }
@@ -1578,7 +1578,7 @@ function clone(configObject) {
    * Return a new BigNumber whose value is the absolute value of this BigNumber.
    */
   P.absoluteValue = P.abs = function () {
-    var x = new BigNumber(this);
+    var x = new BigDecimal(this);
     if (x.s < 0) x.s = 1;
     return x;
   };
@@ -1592,7 +1592,7 @@ function clone(configObject) {
    *   or null if the value of either is NaN.
    */
   P.comparedTo = function (y, b) {
-    return compare(this, new BigNumber(y, b));
+    return compare(this, new BigDecimal(y, b));
   };
 
 
@@ -1618,7 +1618,7 @@ function clone(configObject) {
       if (rm == null) rm = ROUNDING_MODE;
       else intCheck(rm, 0, 8);
 
-      return round(new BigNumber(x), dp + x.e + 1, rm);
+      return round(new BigDecimal(x), dp + x.e + 1, rm);
     }
 
     if (!(c = x.c)) return null;
@@ -1653,7 +1653,7 @@ function clone(configObject) {
    * BigNumber(y, b), rounded according to DECIMAL_PLACES and ROUNDING_MODE.
    */
   P.dividedBy = P.div = function (y, b) {
-    return div(this, new BigNumber(y, b), DECIMAL_PLACES, ROUNDING_MODE);
+    return div(this, new BigDecimal(y, b), DECIMAL_PLACES, ROUNDING_MODE);
   };
 
 
@@ -1662,7 +1662,7 @@ function clone(configObject) {
    * BigNumber by the value of BigNumber(y, b).
    */
   P.dividedToIntegerBy = P.idiv = function (y, b) {
-    return div(this, new BigNumber(y, b), 0, 1);
+    return div(this, new BigDecimal(y, b), 0, 1);
   };
 
 
@@ -1685,7 +1685,7 @@ function clone(configObject) {
     var half, isModExp, i, k, more, nIsBig, nIsNeg, nIsOdd, y,
       x = this;
 
-    n = new BigNumber(n);
+    n = new BigDecimal(n);
 
     // Allow NaN and ±Infinity, but not other non-integers.
     if (n.c && !n.isInteger()) {
@@ -1693,7 +1693,7 @@ function clone(configObject) {
         (bignumberError + 'Exponent not an integer: ' + valueOf(n));
     }
 
-    if (m != null) m = new BigNumber(m);
+    if (m != null) m = new BigDecimal(m);
 
     // Exponent of MAX_SAFE_INTEGER is 15.
     nIsBig = n.e > 14;
@@ -1703,7 +1703,7 @@ function clone(configObject) {
 
       // The sign of the result of pow when x is negative depends on the evenness of n.
       // If +n overflows to ±Infinity, the evenness of n would be not be known.
-      y = new BigNumber(Math.pow(+valueOf(x), nIsBig ? n.s * (2 - isOdd(n)) : +valueOf(n)));
+      y = new BigDecimal(Math.pow(+valueOf(x), nIsBig ? n.s * (2 - isOdd(n)) : +valueOf(n)));
       return m ? y.mod(m) : y;
     }
 
@@ -1712,7 +1712,7 @@ function clone(configObject) {
     if (m) {
 
       // x % m returns NaN if abs(m) is zero, or m is NaN.
-      if (m.c ? !m.c[0] : !m.s) return new BigNumber(NaN);
+      if (m.c ? !m.c[0] : !m.s) return new BigDecimal(NaN);
 
       isModExp = !nIsNeg && x.isInteger() && m.isInteger();
 
@@ -1733,7 +1733,7 @@ function clone(configObject) {
       if (x.e > -1) k = 1 / k;
 
       // If n is negative return ±0, else return ±Infinity.
-      return new BigNumber(nIsNeg ? 1 / k : k);
+      return new BigDecimal(nIsNeg ? 1 / k : k);
 
     } else if (POW_PRECISION) {
 
@@ -1744,7 +1744,7 @@ function clone(configObject) {
     }
 
     if (nIsBig) {
-      half = new BigNumber(0.5);
+      half = new BigDecimal(0.5);
       if (nIsNeg) n.s = 1;
       nIsOdd = isOdd(n);
     } else {
@@ -1752,7 +1752,7 @@ function clone(configObject) {
       nIsOdd = i % 2;
     }
 
-    y = new BigNumber(ONE);
+    y = new BigDecimal(ONE);
 
     // Performs 54 loop iterations for n of 9007199254740991.
     for (; ;) {
@@ -1810,7 +1810,7 @@ function clone(configObject) {
    * '[BigNumber Error] Argument {not a primitive number|not an integer|out of range}: {rm}'
    */
   P.integerValue = function (rm) {
-    var n = new BigNumber(this);
+    var n = new BigDecimal(this);
     if (rm == null) rm = ROUNDING_MODE;
     else intCheck(rm, 0, 8);
     return round(n, n.e + 1, rm);
@@ -1822,7 +1822,7 @@ function clone(configObject) {
    * otherwise return false.
    */
   P.isEqualTo = P.eq = function (y, b) {
-    return compare(this, new BigNumber(y, b)) === 0;
+    return compare(this, new BigDecimal(y, b)) === 0;
   };
 
 
@@ -1839,7 +1839,7 @@ function clone(configObject) {
    * otherwise return false.
    */
   P.isGreaterThan = P.gt = function (y, b) {
-    return compare(this, new BigNumber(y, b)) > 0;
+    return compare(this, new BigDecimal(y, b)) > 0;
   };
 
 
@@ -1848,7 +1848,7 @@ function clone(configObject) {
    * BigNumber(y, b), otherwise return false.
    */
   P.isGreaterThanOrEqualTo = P.gte = function (y, b) {
-    return (b = compare(this, new BigNumber(y, b))) === 1 || b === 0;
+    return (b = compare(this, new BigDecimal(y, b))) === 1 || b === 0;
 
   };
 
@@ -1866,7 +1866,7 @@ function clone(configObject) {
    * otherwise return false.
    */
   P.isLessThan = P.lt = function (y, b) {
-    return compare(this, new BigNumber(y, b)) < 0;
+    return compare(this, new BigDecimal(y, b)) < 0;
   };
 
 
@@ -1875,7 +1875,7 @@ function clone(configObject) {
    * BigNumber(y, b), otherwise return false.
    */
   P.isLessThanOrEqualTo = P.lte = function (y, b) {
-    return (b = compare(this, new BigNumber(y, b))) === -1 || b === 0;
+    return (b = compare(this, new BigDecimal(y, b))) === -1 || b === 0;
   };
 
 
@@ -1936,11 +1936,11 @@ function clone(configObject) {
       x = this,
       a = x.s;
 
-    y = new BigNumber(y, b);
+    y = new BigDecimal(y, b);
     b = y.s;
 
     // Either NaN?
-    if (!a || !b) return new BigNumber(NaN);
+    if (!a || !b) return new BigDecimal(NaN);
 
     // Signs differ?
     if (a != b) {
@@ -1956,13 +1956,13 @@ function clone(configObject) {
     if (!xe || !ye) {
 
       // Either Infinity?
-      if (!xc || !yc) return xc ? (y.s = -b, y) : new BigNumber(yc ? x : NaN);
+      if (!xc || !yc) return xc ? (y.s = -b, y) : new BigDecimal(yc ? x : NaN);
 
       // Either zero?
       if (!xc[0] || !yc[0]) {
 
         // Return y if y is non-zero, x if x is non-zero, or zero if both are zero.
-        return yc[0] ? (y.s = -b, y) : new BigNumber(xc[0] ? x :
+        return yc[0] ? (y.s = -b, y) : new BigDecimal(xc[0] ? x :
 
          // IEEE 754 (2008) 6.3: n - n = -0 when rounding to -Infinity
          ROUNDING_MODE == 3 ? -0 : 0);
@@ -2069,15 +2069,15 @@ function clone(configObject) {
     var q, s,
       x = this;
 
-    y = new BigNumber(y, b);
+    y = new BigDecimal(y, b);
 
     // Return NaN if x is Infinity or NaN, or y is NaN or zero.
     if (!x.c || !y.s || y.c && !y.c[0]) {
-      return new BigNumber(NaN);
+      return new BigDecimal(NaN);
 
     // Return x if y is Infinity or x is zero.
     } else if (!y.c || x.c && !x.c[0]) {
-      return new BigNumber(x);
+      return new BigDecimal(x);
     }
 
     if (MODULO_MODE == 9) {
@@ -2127,7 +2127,7 @@ function clone(configObject) {
       base, sqrtBase,
       x = this,
       xc = x.c,
-      yc = (y = new BigNumber(y, b)).c;
+      yc = (y = new BigDecimal(y, b)).c;
 
     // Either NaN, ±Infinity or ±0?
     if (!xc || !yc || !xc[0] || !yc[0]) {
@@ -2198,7 +2198,7 @@ function clone(configObject) {
    * i.e. multiplied by -1.
    */
   P.negated = function () {
-    var x = new BigNumber(this);
+    var x = new BigDecimal(this);
     x.s = -x.s || null;
     return x;
   };
@@ -2229,11 +2229,11 @@ function clone(configObject) {
       x = this,
       a = x.s;
 
-    y = new BigNumber(y, b);
+    y = new BigDecimal(y, b);
     b = y.s;
 
     // Either NaN?
-    if (!a || !b) return new BigNumber(NaN);
+    if (!a || !b) return new BigDecimal(NaN);
 
     // Signs differ?
      if (a != b) {
@@ -2249,11 +2249,11 @@ function clone(configObject) {
     if (!xe || !ye) {
 
       // Return ±Infinity if either ±Infinity.
-      if (!xc || !yc) return new BigNumber(a / 0);
+      if (!xc || !yc) return new BigDecimal(a / 0);
 
       // Either zero?
       // Return y if y is non-zero, x if x is non-zero, or zero if both are zero.
-      if (!xc[0] || !yc[0]) return yc[0] ? y : new BigNumber(xc[0] ? x : a * 0);
+      if (!xc[0] || !yc[0]) return yc[0] ? y : new BigDecimal(xc[0] ? x : a * 0);
     }
 
     xe = bitFloor(xe);
@@ -2322,7 +2322,7 @@ function clone(configObject) {
       if (rm == null) rm = ROUNDING_MODE;
       else intCheck(rm, 0, 8);
 
-      return round(new BigNumber(x), sd, rm);
+      return round(new BigDecimal(x), sd, rm);
     }
 
     if (!(c = x.c)) return null;
@@ -2376,11 +2376,11 @@ function clone(configObject) {
       s = x.s,
       e = x.e,
       dp = DECIMAL_PLACES + 4,
-      half = new BigNumber('0.5');
+      half = new BigDecimal('0.5');
 
     // Negative/NaN/Infinity/zero?
     if (s !== 1 || !c || !c[0]) {
-      return new BigNumber(!s || s < 0 && (!c || c[0]) ? NaN : c ? x : 1 / 0);
+      return new BigDecimal(!s || s < 0 && (!c || c[0]) ? NaN : c ? x : 1 / 0);
     }
 
     // Initial estimate.
@@ -2401,9 +2401,9 @@ function clone(configObject) {
         n = n.slice(0, n.indexOf('e') + 1) + e;
       }
 
-      r = new BigNumber(n);
+      r = new BigDecimal(n);
     } else {
-      r = new BigNumber(s + '');
+      r = new BigDecimal(s + '');
     }
 
     // Check for zero.
@@ -2604,7 +2604,7 @@ function clone(configObject) {
       xc = x.c;
 
     if (md != null) {
-      n = new BigNumber(md);
+      n = new BigDecimal(md);
 
       // Throw if md is less than one or is not an integer, unless it is Infinity.
       if (!n.isInteger() && (n.c || n.s !== 1) || n.lt(ONE)) {
@@ -2614,11 +2614,11 @@ function clone(configObject) {
       }
     }
 
-    if (!xc) return new BigNumber(x);
+    if (!xc) return new BigDecimal(x);
 
-    d = new BigNumber(ONE);
-    n1 = d0 = new BigNumber(ONE);
-    d1 = n0 = new BigNumber(ONE);
+    d = new BigDecimal(ONE);
+    n1 = d0 = new BigDecimal(ONE);
+    d1 = n0 = new BigDecimal(ONE);
     s = coeffToString(xc);
 
     // Determine initial denominator.
@@ -2629,7 +2629,7 @@ function clone(configObject) {
 
     exp = MAX_EXP;
     MAX_EXP = 1 / 0;
-    n = new BigNumber(s);
+    n = new BigDecimal(s);
 
     // n0 = d1 = 0
     n0.c[0] = 0;
@@ -2718,7 +2718,7 @@ function clone(configObject) {
          ? toExponential(coeffToString(n.c), e)
          : toFixedPoint(coeffToString(n.c), e, '0');
       } else if (b === 10 && alphabetHasNormalDecimalDigits) {
-        n = round(new BigNumber(n), DECIMAL_PLACES + e + 1, ROUNDING_MODE);
+        n = round(new BigDecimal(n), DECIMAL_PLACES + e + 1, ROUNDING_MODE);
         str = toFixedPoint(coeffToString(n.c), n.e, '0');
       } else {
         intCheck(b, 2, ALPHABET.length, 'Base');
@@ -2748,9 +2748,9 @@ function clone(configObject) {
   // Node.js v10.12.0+
   P[Symbol.for('nodejs.util.inspect.custom')] = P.valueOf;
 
-  if (configObject != null) BigNumber.set(configObject);
+  if (configObject != null) BigDecimal.set(configObject);
 
-  return BigNumber;
+  return BigDecimal;
 }
 
 
@@ -2884,6 +2884,6 @@ function toFixedPoint(str, e, z) {
 // EXPORT
 
 
-export var BigNumber = clone();
+export var BigDecimal = clone();
 
-export default BigNumber;
+export default BigDecimal;

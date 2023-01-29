@@ -6,12 +6,12 @@ Test('modulo', function () {
         I = 'Infinity';
 
     function t(a, b, expected) {
-        Test.areEqual(String(expected), String(new BigNumber(a).modulo(new BigNumber(b))));
+        Test.areEqual(String(expected), String(new BigDecimal(a).modulo(new BigDecimal(b))));
     }
 
-    Test.areEqual(BigNumber.prototype.modulo, BigNumber.prototype.mod);
+    Test.areEqual(BigDecimal.prototype.modulo, BigDecimal.prototype.mod);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -28,20 +28,20 @@ Test('modulo', function () {
     t(1, -I, 1);
     t(-1, I, -1);
     t(-1, -I, -1);
-    Test.areEqual('0', new BigNumber(0).mod(1).valueOf());
-    Test.areEqual('0', new BigNumber(0).mod(-1).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(1).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(-1).valueOf());
+    Test.areEqual('0', new BigDecimal(0).mod(1).valueOf());
+    Test.areEqual('0', new BigDecimal(0).mod(-1).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(1).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(-1).valueOf());
     t(0, 0, N);
     t(0, -0, N);
     t(-0, 0, N);
     t(-0, -0, N);
     t(0, N, N);
     t(-0, N, N);
-    Test.areEqual('0', new BigNumber(0).mod(I).valueOf());
-    Test.areEqual('0', new BigNumber(0).mod(-I).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(I).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(-I).valueOf());
+    Test.areEqual('0', new BigDecimal(0).mod(I).valueOf());
+    Test.areEqual('0', new BigDecimal(0).mod(-I).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(I).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(-I).valueOf());
     t(N, 1, N);
     t(N, -1, N);
     t(N, 0, N);
@@ -65,7 +65,7 @@ Test('modulo', function () {
     t(-I, -I, N);
 
     t(1, '0', N);
-    Test.areEqual('0', new BigNumber(1).mod(1).valueOf());
+    Test.areEqual('0', new BigDecimal(1).mod(1).valueOf());
     t(1, '-45', '1');
     t(1, '22', '1');
     t(1, 0144, '1');
@@ -99,14 +99,14 @@ Test('modulo', function () {
     t(999.99, '3.01', '0.67');
     t(-999.99, '3.01', '-0.67');
     t(1, '0.09', '0.01');
-    Test.areEqual('0', new BigNumber(1).mod('-0.0001').valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(1).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).mod(0.1).valueOf());
-    Test.areEqual('-0', new BigNumber('-0').mod('-1').valueOf());
-    Test.areEqual('-0', new BigNumber('-0').mod(Infinity).valueOf());
+    Test.areEqual('0', new BigDecimal(1).mod('-0.0001').valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(1).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).mod(0.1).valueOf());
+    Test.areEqual('-0', new BigDecimal('-0').mod('-1').valueOf());
+    Test.areEqual('-0', new BigDecimal('-0').mod(Infinity).valueOf());
     t(1, '8e5', '1');
     t(1, '9E12', '1');
-    Test.areEqual('0', new BigNumber(1).mod('1e-14').valueOf());
+    Test.areEqual('0', new BigDecimal(1).mod('1e-14').valueOf());
     t(1, '3.345E-9', '6.1e-10');
     t(1, '-345.43e+4', '1');
     t(1, '-94.12E+0', '1');

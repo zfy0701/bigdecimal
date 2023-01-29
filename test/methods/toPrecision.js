@@ -4,10 +4,10 @@ Test('toPrecision', function () {
     var MAX = 1e9;
 
     function t(expected, value, precision){
-        Test.areEqual(String(expected), new BigNumber(value).toPrecision(precision));
+        Test.areEqual(String(expected), new BigDecimal(value).toPrecision(precision));
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -107,7 +107,7 @@ Test('toPrecision', function () {
     t('1.0e+5', 99576, 2);
     t('1e+8', '96236483.87', 1);
 
-    BigNumber.config({ROUNDING_MODE: 0});
+    BigDecimal.config({ROUNDING_MODE: 0});
 
     t('-0.000090000000', '-0.00009', 8);
     t('-7e-7', '-0.0000007', 1);
@@ -196,7 +196,7 @@ Test('toPrecision', function () {
     t('-8606297211156287.52520023752564', '-8606297211156287.5252002375256362382564355963505470716151', 30);
     t('-8.4634889709e+24', '-8463488970828351722405003.220603', 11);
 
-    BigNumber.config({ROUNDING_MODE: 1});
+    BigDecimal.config({ROUNDING_MODE: 1});
 
     t('-844789036.5239726', '-844789036.52397268892', 16);
     t('-5056.20629012767878749185273209679064306054', '-5056.206290127678787491852732096790643060542', 42);
@@ -287,7 +287,7 @@ Test('toPrecision', function () {
     t('45285.246089613169416440797840714', '45285.2460896131694164407978407142422013937', 32);
     t('307760226411464.7333268079863299', '307760226411464.73332680798632996332324381779707', 31);
 
-    BigNumber.config({ROUNDING_MODE: 2});
+    BigDecimal.config({ROUNDING_MODE: 2});
 
     t('-0.0300', '-0.0300921721159558', 3);
     t('65317841202.20949859371772273480125', '65317841202.2094985937177227348012464402154', 34);
@@ -372,7 +372,7 @@ Test('toPrecision', function () {
     t('-49379651041268.5', '-49379651041268.548293', 15);
     t('-7685054.17489171951660', '-7685054.17489171951660508194254495141726065698575306365447451', 21);
 
-    BigNumber.config({ROUNDING_MODE: 3});
+    BigDecimal.config({ROUNDING_MODE: 3});
 
     t('-39449414270333.925852213835', '-39449414270333.925852213834759031494508489474', 26);
     t('-7.50437989976', '-7.50437989975503711836768', 12);
@@ -464,7 +464,7 @@ Test('toPrecision', function () {
     t('-6.4898237111e+26', '-648982371105405071851661301', 11);
     t('-4641197449469148.658850361201903', '-4641197449469148.658850361201902222', 31);
 
-    BigNumber.config({ROUNDING_MODE: 4});
+    BigDecimal.config({ROUNDING_MODE: 4});
 
     t('7.905300379788e+16', '79053003797878062.6454954', 13);
     t('-6.83490000000e-13', '-0.00000000000068349', 12);
@@ -552,7 +552,7 @@ Test('toPrecision', function () {
     t('-6.21108762339449e+20', '-621108762339448671355.1393522133', 15);
     t('8380435.063269894549337249', '8380435.063269894549337248813357930541546715547', 25);
 
-    BigNumber.config({ROUNDING_MODE: 5});
+    BigDecimal.config({ROUNDING_MODE: 5});
 
     t('-1408003897645960.648499616456', '-1408003897645960.648499616456', 28);
     t('-7719307749101742537.6299396338672184', '-7719307749101742537.6299396338672184334306', 35);
@@ -639,7 +639,7 @@ Test('toPrecision', function () {
     t('50325.551277778107847798802', '50325.551277778107847798801525', 26);
     t('-5.289303987e+29', '-528930398665449048343281311623.69686', 10);
 
-    BigNumber.config({ROUNDING_MODE: 6});
+    BigDecimal.config({ROUNDING_MODE: 6});
 
     t('0.08000', '0.08', 4);
     t('-4.5132e+21', '-4513243388120382069815.8508153058993058875', 5);
@@ -735,31 +735,31 @@ Test('toPrecision', function () {
     t('123.45', '12.345e1', null);
     t('123.45', '12.345e1', undefined);
 
-    Test.isException(function () {new BigNumber(1.23).toPrecision(NaN)}, "(1.23).toPrecision(NaN)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision('NaN')}, "(1.23).toPrecision('NaN')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision([])}, "(1.23).toPrecision([])");
-    Test.isException(function () {new BigNumber(1.23).toPrecision({})}, "(1.23).toPrecision({})");
-    Test.isException(function () {new BigNumber(1.23).toPrecision('')}, "(1.23).toPrecision('')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(' ')}, "(1.23).toPrecision(' ')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision('hello')}, "(1.23).toPrecision('hello')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision('\t')}, "(1.23).toPrecision('\t')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(new Date)}, "(1.23).toPrecision(new Date)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(new RegExp)}, "(1.23).toPrecision(new RegExp)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(2.01)}, "(1.23).toPrecision(2.01)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(10.5)}, "(1.23).toPrecision(10.5)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision('-1.1e1')}, "(1.23).toPrecision('-1.1e1')");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(true)}, "(1.23).toPrecision(true)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(false)}, "(1.23).toPrecision(false)");
-    Test.isException(function () {new BigNumber(1.23).toPrecision(function (){})}, "(1.23).toPrecision(function (){})");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(NaN)}, "(1.23).toPrecision(NaN)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision('NaN')}, "(1.23).toPrecision('NaN')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision([])}, "(1.23).toPrecision([])");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision({})}, "(1.23).toPrecision({})");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision('')}, "(1.23).toPrecision('')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(' ')}, "(1.23).toPrecision(' ')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision('hello')}, "(1.23).toPrecision('hello')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision('\t')}, "(1.23).toPrecision('\t')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(new Date)}, "(1.23).toPrecision(new Date)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(new RegExp)}, "(1.23).toPrecision(new RegExp)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(2.01)}, "(1.23).toPrecision(2.01)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(10.5)}, "(1.23).toPrecision(10.5)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision('-1.1e1')}, "(1.23).toPrecision('-1.1e1')");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(true)}, "(1.23).toPrecision(true)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(false)}, "(1.23).toPrecision(false)");
+    Test.isException(function () {new BigDecimal(1.23).toPrecision(function (){})}, "(1.23).toPrecision(function (){})");
 
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision('-1')}, ".toPrecision('-1')");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(-23)}, ".toPrecision(-23)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(MAX + 1)}, ".toPrecision(MAX + 1)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(MAX + 0.1)}, ".toPrecision(MAX + 0.1)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(0)}, ".toPrecision(0)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision('-0')}, ".toPrecision('-0')");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(0.9)}, ".toPrecision(0.9)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision('-1e-1')}, ".toPrecision('-1e-1')");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision(Infinity)}, ".toPrecision(Infinity)");
-    Test.isException(function () {new BigNumber('12.345e1').toPrecision('-Infinity')}, ".toPrecision('-Infinity')");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision('-1')}, ".toPrecision('-1')");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(-23)}, ".toPrecision(-23)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(MAX + 1)}, ".toPrecision(MAX + 1)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(MAX + 0.1)}, ".toPrecision(MAX + 0.1)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(0)}, ".toPrecision(0)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision('-0')}, ".toPrecision('-0')");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(0.9)}, ".toPrecision(0.9)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision('-1e-1')}, ".toPrecision('-1e-1')");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision(Infinity)}, ".toPrecision(Infinity)");
+    Test.isException(function () {new BigDecimal('12.345e1').toPrecision('-Infinity')}, ".toPrecision('-Infinity')");
 });

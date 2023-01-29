@@ -21,7 +21,7 @@ Test = (function () {
   } else {
 
     // Add `BigNumber` to global scope.
-    BigNumber = require('../bignumber');
+    BigDecimal = require('../bignumber');
     write = process.stdout.write.bind(process.stdout);
   }
 
@@ -80,4 +80,4 @@ Test = (function () {
   return Test;
 })();
 
-BigNumber.DEBUG = true;
+BigDecimal.DEBUG = true;

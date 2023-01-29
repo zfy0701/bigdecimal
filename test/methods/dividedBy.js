@@ -6,14 +6,14 @@ Test('dividedBy', function () {
         I = 'Infinity';
 
     function t(dividend, divisor, expected, dp, rm) {
-        if (dp != null) BigNumber.config({ DECIMAL_PLACES: dp, ROUNDING_MODE: rm });
-        Test.areEqual(String(expected), String(new BigNumber(dividend).dividedBy(divisor)));
+        if (dp != null) BigDecimal.config({ DECIMAL_PLACES: dp, ROUNDING_MODE: rm });
+        Test.areEqual(String(expected), String(new BigDecimal(dividend).dividedBy(divisor)));
         //Test.areEqual(String(expected), String(new BigNumber(dividend).dividedBy(new BigNumber(divisor))));
     }
 
-    Test.areEqual(BigNumber.prototype.dividedBy, BigNumber.prototype.div);
+    Test.areEqual(BigDecimal.prototype.dividedBy, BigDecimal.prototype.div);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 40,
         ROUNDING_MODE: 4,
         EXPONENTIAL_AT: [-7, 21],
@@ -26,24 +26,24 @@ Test('dividedBy', function () {
     t(-1, -0, I);
     t(1, N, N);
     t(-1, N, N);
-    Test.areEqual('0', new BigNumber(1).div(I).valueOf());
-    Test.areEqual('-0', new BigNumber(1).div(-I).valueOf());
-    Test.areEqual('-0', new BigNumber(-1).div(I).valueOf());
-    Test.areEqual('0', new BigNumber(-1).div(-I).valueOf());
-    Test.areEqual('0', new BigNumber(0).div(1).valueOf());
-    Test.areEqual('-0', new BigNumber(0).div(-1).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).div(1).valueOf());
-    Test.areEqual('0', new BigNumber(-0).div(-1).valueOf());
+    Test.areEqual('0', new BigDecimal(1).div(I).valueOf());
+    Test.areEqual('-0', new BigDecimal(1).div(-I).valueOf());
+    Test.areEqual('-0', new BigDecimal(-1).div(I).valueOf());
+    Test.areEqual('0', new BigDecimal(-1).div(-I).valueOf());
+    Test.areEqual('0', new BigDecimal(0).div(1).valueOf());
+    Test.areEqual('-0', new BigDecimal(0).div(-1).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).div(1).valueOf());
+    Test.areEqual('0', new BigDecimal(-0).div(-1).valueOf());
     t(0, 0, N);
     t(0, -0, N);
     t(-0, 0, N);
     t(-0, -0, N);
     t(0, N, N);
     t(-0, N, N);
-    Test.areEqual('0', new BigNumber(0).div(I).valueOf());
-    Test.areEqual('-0', new BigNumber(0).div(-I).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).div(I).valueOf());
-    Test.areEqual('0', new BigNumber(-0).div(-I).valueOf());
+    Test.areEqual('0', new BigDecimal(0).div(I).valueOf());
+    Test.areEqual('-0', new BigDecimal(0).div(-I).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).div(I).valueOf());
+    Test.areEqual('0', new BigDecimal(-0).div(-I).valueOf());
     t(N, 1, N);
     t(N, -1, N);
     t(N, 0, N);
@@ -1948,8 +1948,8 @@ Test('dividedBy', function () {
     t('10', '1e+1000000000', '0', 0, 4);
     t('1', '1e-1000000000', '1e+1000000000');
     t('10', '1e-1000000000', 'Infinity');
-    var x = new BigNumber(1e-9);
-    BigNumber.config({ RANGE: [-8, 1e9] });
+    var x = new BigDecimal(1e-9);
+    BigDecimal.config({ RANGE: [-8, 1e9] });
     t(x, 1, '0', 9, 4);
 
     // Issue #58

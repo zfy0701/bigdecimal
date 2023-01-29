@@ -10,7 +10,7 @@ Test('bigNumber', function () {
         Test.isException(fn, msg);
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         EXPONENTIAL_AT: 1E9,
@@ -20,242 +20,242 @@ Test('bigNumber', function () {
 
     // Parsing tests
 
-    t('Infinity', new BigNumber('1e10000000000'));
-    t('-Infinity', new BigNumber('-1e10000000000'));
-    t('0', new BigNumber('1e-10000000000'));
-    t('0', new BigNumber('-1e-10000000000'));
+    t('Infinity', new BigDecimal('1e10000000000'));
+    t('-Infinity', new BigDecimal('-1e10000000000'));
+    t('0', new BigDecimal('1e-10000000000'));
+    t('0', new BigDecimal('-1e-10000000000'));
 
-    t('NaN', new BigNumber(NaN));
-    t('NaN', new BigNumber(-NaN));
-    t('NaN', new BigNumber(+NaN));
-    t('NaN', new BigNumber('NaN'));
-    t('NaN', new BigNumber(' NaN'));
-    t('NaN', new BigNumber('NaN '));
-    t('NaN', new BigNumber(' NaN '));
-    t('NaN', new BigNumber('+NaN'));
-    t('NaN', new BigNumber(' +NaN'));
-    t('NaN', new BigNumber('+NaN '));
-    t('NaN', new BigNumber(' +NaN '));
-    t('NaN', new BigNumber('-NaN'));
-    t('NaN', new BigNumber(' -NaN'));
-    t('NaN', new BigNumber('-NaN '));
-    t('NaN', new BigNumber(' -NaN '));
+    t('NaN', new BigDecimal(NaN));
+    t('NaN', new BigDecimal(-NaN));
+    t('NaN', new BigDecimal(+NaN));
+    t('NaN', new BigDecimal('NaN'));
+    t('NaN', new BigDecimal(' NaN'));
+    t('NaN', new BigDecimal('NaN '));
+    t('NaN', new BigDecimal(' NaN '));
+    t('NaN', new BigDecimal('+NaN'));
+    t('NaN', new BigDecimal(' +NaN'));
+    t('NaN', new BigDecimal('+NaN '));
+    t('NaN', new BigDecimal(' +NaN '));
+    t('NaN', new BigDecimal('-NaN'));
+    t('NaN', new BigDecimal(' -NaN'));
+    t('NaN', new BigDecimal('-NaN '));
+    t('NaN', new BigDecimal(' -NaN '));
 
-    tx(function () {new BigNumber('+ NaN')}, "+ NaN");
-    tx(function () {new BigNumber('- NaN')}, "- NaN");
-    tx(function () {new BigNumber(' + NaN')}, " + NaN");
-    tx(function () {new BigNumber(' - NaN')}, " - NaN");
-    tx(function () {new BigNumber('. NaN')}, ". NaN");
-    tx(function () {new BigNumber('.-NaN')}, ".-NaN");
-    tx(function () {new BigNumber('.+NaN')}, ".+NaN");
-    tx(function () {new BigNumber('-.NaN')}, "-.NaN");
-    tx(function () {new BigNumber('+.NaN')}, "+.NaN");
+    tx(function () {new BigDecimal('+ NaN')}, "+ NaN");
+    tx(function () {new BigDecimal('- NaN')}, "- NaN");
+    tx(function () {new BigDecimal(' + NaN')}, " + NaN");
+    tx(function () {new BigDecimal(' - NaN')}, " - NaN");
+    tx(function () {new BigDecimal('. NaN')}, ". NaN");
+    tx(function () {new BigDecimal('.-NaN')}, ".-NaN");
+    tx(function () {new BigDecimal('.+NaN')}, ".+NaN");
+    tx(function () {new BigDecimal('-.NaN')}, "-.NaN");
+    tx(function () {new BigDecimal('+.NaN')}, "+.NaN");
 
-    t('Infinity', new BigNumber(Infinity));
-    t('-Infinity', new BigNumber(-Infinity));
-    t('Infinity', new BigNumber(+Infinity));
-    t('Infinity', new BigNumber('Infinity'));
-    t('Infinity', new BigNumber(' Infinity'));
-    t('Infinity', new BigNumber('Infinity '));
-    t('Infinity', new BigNumber(' Infinity '));
-    t('Infinity', new BigNumber('+Infinity'));
-    t('Infinity', new BigNumber(' +Infinity'));
-    t('Infinity', new BigNumber('+Infinity '));
-    t('Infinity', new BigNumber(' +Infinity '));
-    t('-Infinity', new BigNumber('-Infinity'));
-    t('-Infinity', new BigNumber(' -Infinity'));
-    t('-Infinity', new BigNumber('-Infinity '));
-    t('-Infinity', new BigNumber(' -Infinity '));
+    t('Infinity', new BigDecimal(Infinity));
+    t('-Infinity', new BigDecimal(-Infinity));
+    t('Infinity', new BigDecimal(+Infinity));
+    t('Infinity', new BigDecimal('Infinity'));
+    t('Infinity', new BigDecimal(' Infinity'));
+    t('Infinity', new BigDecimal('Infinity '));
+    t('Infinity', new BigDecimal(' Infinity '));
+    t('Infinity', new BigDecimal('+Infinity'));
+    t('Infinity', new BigDecimal(' +Infinity'));
+    t('Infinity', new BigDecimal('+Infinity '));
+    t('Infinity', new BigDecimal(' +Infinity '));
+    t('-Infinity', new BigDecimal('-Infinity'));
+    t('-Infinity', new BigDecimal(' -Infinity'));
+    t('-Infinity', new BigDecimal('-Infinity '));
+    t('-Infinity', new BigDecimal(' -Infinity '));
 
-    tx(function () {new BigNumber('+ Infinity')}, "+ Infinity");
-    tx(function () {new BigNumber(' + Infinity')}, " + Infinity");
-    tx(function () {new BigNumber('- Infinity')}, "- Infinity");
-    tx(function () {new BigNumber(' - Infinity')}, " - Infinity");
-    tx(function () {new BigNumber('.Infinity')}, ".Infinity");
-    tx(function () {new BigNumber('. Infinity')}, ". Infinity");
-    tx(function () {new BigNumber('.-Infinity')}, ".-Infinity");
-    tx(function () {new BigNumber('.+Infinity')}, ".+Infinity");
-    tx(function () {new BigNumber('-.Infinity')}, "-.Infinity");
-    tx(function () {new BigNumber('+.Infinity')}, "+.Infinity");
+    tx(function () {new BigDecimal('+ Infinity')}, "+ Infinity");
+    tx(function () {new BigDecimal(' + Infinity')}, " + Infinity");
+    tx(function () {new BigDecimal('- Infinity')}, "- Infinity");
+    tx(function () {new BigDecimal(' - Infinity')}, " - Infinity");
+    tx(function () {new BigDecimal('.Infinity')}, ".Infinity");
+    tx(function () {new BigDecimal('. Infinity')}, ". Infinity");
+    tx(function () {new BigDecimal('.-Infinity')}, ".-Infinity");
+    tx(function () {new BigDecimal('.+Infinity')}, ".+Infinity");
+    tx(function () {new BigDecimal('-.Infinity')}, "-.Infinity");
+    tx(function () {new BigDecimal('+.Infinity')}, "+.Infinity");
 
-    t('0', new BigNumber(0));
-    t('0', new BigNumber(-0));
-    t('0', new BigNumber('.0'));
-    t('0', new BigNumber('0.'));
-    t('0', new BigNumber('-0.'));
-    t('0', new BigNumber('+0.'));
-    t('0', new BigNumber('+0'));
-    t('0', new BigNumber('-0'));
-    t('0', new BigNumber(' +0'));
-    t('0', new BigNumber(' -0'));
-    t('0', new BigNumber(' +0 '));
-    t('0', new BigNumber(' -0 '));
-    t('0', new BigNumber('+.0'));
-    t('0', new BigNumber('-.0'));
-    t('0', new BigNumber(' +.0'));
-    t('0', new BigNumber(' -.0'));
-    t('0', new BigNumber(' +.0 '));
-    t('0', new BigNumber(' -.0 '));
+    t('0', new BigDecimal(0));
+    t('0', new BigDecimal(-0));
+    t('0', new BigDecimal('.0'));
+    t('0', new BigDecimal('0.'));
+    t('0', new BigDecimal('-0.'));
+    t('0', new BigDecimal('+0.'));
+    t('0', new BigDecimal('+0'));
+    t('0', new BigDecimal('-0'));
+    t('0', new BigDecimal(' +0'));
+    t('0', new BigDecimal(' -0'));
+    t('0', new BigDecimal(' +0 '));
+    t('0', new BigDecimal(' -0 '));
+    t('0', new BigDecimal('+.0'));
+    t('0', new BigDecimal('-.0'));
+    t('0', new BigDecimal(' +.0'));
+    t('0', new BigDecimal(' -.0'));
+    t('0', new BigDecimal(' +.0 '));
+    t('0', new BigDecimal(' -.0 '));
 
-    tx(function () {new BigNumber('+-0')}, "+-0");
-    tx(function () {new BigNumber('-+0')}, "-+0");
-    tx(function () {new BigNumber('--0')}, "--0");
-    tx(function () {new BigNumber('++0')}, "++0");
-    tx(function () {new BigNumber('.-0')}, ".-0");
-    tx(function () {new BigNumber('.+0')}, ".+0");
-    tx(function () {new BigNumber('0 .')}, "0 .");
-    tx(function () {new BigNumber('. 0')}, ". 0");
-    tx(function () {new BigNumber('..0')}, "..0");
-    tx(function () {new BigNumber('+.-0')}, "+.-0");
-    tx(function () {new BigNumber('-.+0')}, "-.+0");
-    tx(function () {new BigNumber('+. 0')}, "+. 0");
-    tx(function () {new BigNumber('-. 0')}, "-. 0");
+    tx(function () {new BigDecimal('+-0')}, "+-0");
+    tx(function () {new BigDecimal('-+0')}, "-+0");
+    tx(function () {new BigDecimal('--0')}, "--0");
+    tx(function () {new BigDecimal('++0')}, "++0");
+    tx(function () {new BigDecimal('.-0')}, ".-0");
+    tx(function () {new BigDecimal('.+0')}, ".+0");
+    tx(function () {new BigDecimal('0 .')}, "0 .");
+    tx(function () {new BigDecimal('. 0')}, ". 0");
+    tx(function () {new BigDecimal('..0')}, "..0");
+    tx(function () {new BigDecimal('+.-0')}, "+.-0");
+    tx(function () {new BigDecimal('-.+0')}, "-.+0");
+    tx(function () {new BigDecimal('+. 0')}, "+. 0");
+    tx(function () {new BigDecimal('-. 0')}, "-. 0");
 
-    t('2', new BigNumber('+2'));
-    t('-2', new BigNumber('-2'));
-    t('2', new BigNumber(' +2'));
-    t('-2', new BigNumber(' -2'));
-    t('2', new BigNumber(' +2 '));
-    t('-2', new BigNumber(' -2 '));
-    t('0.2', new BigNumber('.2'));
-    t('2', new BigNumber('2.'));
-    t('-2', new BigNumber('-2.'));
-    t('2', new BigNumber('+2.'));
-    t('0.2', new BigNumber('+.2'));
-    t('-0.2', new BigNumber('-.2'));
-    t('0.2', new BigNumber(' +.2'));
-    t('-0.2', new BigNumber(' -.2'));
-    t('0.2', new BigNumber(' +.2 '));
-    t('-0.2', new BigNumber(' -.2 '));
+    t('2', new BigDecimal('+2'));
+    t('-2', new BigDecimal('-2'));
+    t('2', new BigDecimal(' +2'));
+    t('-2', new BigDecimal(' -2'));
+    t('2', new BigDecimal(' +2 '));
+    t('-2', new BigDecimal(' -2 '));
+    t('0.2', new BigDecimal('.2'));
+    t('2', new BigDecimal('2.'));
+    t('-2', new BigDecimal('-2.'));
+    t('2', new BigDecimal('+2.'));
+    t('0.2', new BigDecimal('+.2'));
+    t('-0.2', new BigDecimal('-.2'));
+    t('0.2', new BigDecimal(' +.2'));
+    t('-0.2', new BigDecimal(' -.2'));
+    t('0.2', new BigDecimal(' +.2 '));
+    t('-0.2', new BigDecimal(' -.2 '));
 
-    tx(function () {new BigNumber('+-2')}, "+-2");
-    tx(function () {new BigNumber('-+2')}, "-+2");
-    tx(function () {new BigNumber('--2')}, "--2");
-    tx(function () {new BigNumber('++2')}, "++2");
-    tx(function () {new BigNumber('.-2')}, ".-2");
-    tx(function () {new BigNumber('.+2')}, ".+2");
-    tx(function () {new BigNumber('2 .')}, "2 .");
-    tx(function () {new BigNumber('. 2')}, ". 2");
-    tx(function () {new BigNumber('..2')}, "..2");
-    tx(function () {new BigNumber('+.-2')}, "+.-2");
-    tx(function () {new BigNumber('-.+2')}, "-.+2");
-    tx(function () {new BigNumber('+. 2')}, "+. 2");
-    tx(function () {new BigNumber('-. 2')}, "-. 2");
+    tx(function () {new BigDecimal('+-2')}, "+-2");
+    tx(function () {new BigDecimal('-+2')}, "-+2");
+    tx(function () {new BigDecimal('--2')}, "--2");
+    tx(function () {new BigDecimal('++2')}, "++2");
+    tx(function () {new BigDecimal('.-2')}, ".-2");
+    tx(function () {new BigDecimal('.+2')}, ".+2");
+    tx(function () {new BigDecimal('2 .')}, "2 .");
+    tx(function () {new BigDecimal('. 2')}, ". 2");
+    tx(function () {new BigDecimal('..2')}, "..2");
+    tx(function () {new BigDecimal('+.-2')}, "+.-2");
+    tx(function () {new BigDecimal('-.+2')}, "-.+2");
+    tx(function () {new BigDecimal('+. 2')}, "+. 2");
+    tx(function () {new BigDecimal('-. 2')}, "-. 2");
 
-    tx(function () {new BigNumber('+2..')}, "+2..");
-    tx(function () {new BigNumber('-2..')}, "-2..");
-    tx(function () {new BigNumber('-.2.')}, "-.2.");
-    tx(function () {new BigNumber('+.2.')}, "+.2.");
-    tx(function () {new BigNumber('.-20.')}, ".-20.");
-    tx(function () {new BigNumber('.+20.')}, ".+20.");
-    tx(function () {new BigNumber('. 20.')}, ". 20.");
+    tx(function () {new BigDecimal('+2..')}, "+2..");
+    tx(function () {new BigDecimal('-2..')}, "-2..");
+    tx(function () {new BigDecimal('-.2.')}, "-.2.");
+    tx(function () {new BigDecimal('+.2.')}, "+.2.");
+    tx(function () {new BigDecimal('.-20.')}, ".-20.");
+    tx(function () {new BigDecimal('.+20.')}, ".+20.");
+    tx(function () {new BigDecimal('. 20.')}, ". 20.");
 
-    tx(function () {new BigNumber(undefined)}, "undefined");
-    tx(function () {new BigNumber([])}, "[]");
-    tx(function () {new BigNumber('')}, "''");
-    tx(function () {new BigNumber(null)}, "null");
-    tx(function () {new BigNumber(' ')}, "' '");
-    tx(function () {new BigNumber('nan')}, "nan");
-    tx(function () {new BigNumber('23er')}, "23er");
-    tx(function () {new BigNumber('e4')}, "e4");
-    tx(function () {new BigNumber('0x')}, "0x");
-    tx(function () {new BigNumber('0x.')}, "0x.");
-    tx(function () {new BigNumber('+0x')}, "+0x");
-    tx(function () {new BigNumber('.0x1')}, ".0x1");
-    tx(function () {new BigNumber('.0x1', 16)}, ".0x1, 16");
-    tx(function () {new BigNumber('. 0x1')}, ". 0x1");
-    tx(function () {new BigNumber('0x1', 15)}, "0x1, 15");
-    tx(function () {new BigNumber('0b')}, "0b");
-    tx(function () {new BigNumber('+0b')}, "+0b");
-    tx(function () {new BigNumber('0b.')}, "0b.");
-    tx(function () {new BigNumber('.0b1')}, ".0b1");
-    tx(function () {new BigNumber('. 0b1 ')}, ". 0b1 ");
-    tx(function () {new BigNumber('0b1', 3)}, "0b1, 3");
-    tx(function () {new BigNumber('0o')}, "0o");
-    tx(function () {new BigNumber('0o.')}, "0o.");
-    tx(function () {new BigNumber('.0o1')}, ".0o1");
-    tx(function () {new BigNumber('.0o1')}, ".0o1");
-    tx(function () {new BigNumber('0 o1')}, "0 o1");
-    tx(function () {new BigNumber('0o 1')}, "0o 1");
-    tx(function () {new BigNumber('0-o1')}, "0o-1");
-    tx(function () {new BigNumber('0o1', 16)}, "0o1, 16");
-    tx(function () {new BigNumber('--45')}, "--45");
-    tx(function () {new BigNumber('+-2')}, "+-2");
-    tx(function () {new BigNumber('0 0')}, "0 0");
+    tx(function () {new BigDecimal(undefined)}, "undefined");
+    tx(function () {new BigDecimal([])}, "[]");
+    tx(function () {new BigDecimal('')}, "''");
+    tx(function () {new BigDecimal(null)}, "null");
+    tx(function () {new BigDecimal(' ')}, "' '");
+    tx(function () {new BigDecimal('nan')}, "nan");
+    tx(function () {new BigDecimal('23er')}, "23er");
+    tx(function () {new BigDecimal('e4')}, "e4");
+    tx(function () {new BigDecimal('0x')}, "0x");
+    tx(function () {new BigDecimal('0x.')}, "0x.");
+    tx(function () {new BigDecimal('+0x')}, "+0x");
+    tx(function () {new BigDecimal('.0x1')}, ".0x1");
+    tx(function () {new BigDecimal('.0x1', 16)}, ".0x1, 16");
+    tx(function () {new BigDecimal('. 0x1')}, ". 0x1");
+    tx(function () {new BigDecimal('0x1', 15)}, "0x1, 15");
+    tx(function () {new BigDecimal('0b')}, "0b");
+    tx(function () {new BigDecimal('+0b')}, "+0b");
+    tx(function () {new BigDecimal('0b.')}, "0b.");
+    tx(function () {new BigDecimal('.0b1')}, ".0b1");
+    tx(function () {new BigDecimal('. 0b1 ')}, ". 0b1 ");
+    tx(function () {new BigDecimal('0b1', 3)}, "0b1, 3");
+    tx(function () {new BigDecimal('0o')}, "0o");
+    tx(function () {new BigDecimal('0o.')}, "0o.");
+    tx(function () {new BigDecimal('.0o1')}, ".0o1");
+    tx(function () {new BigDecimal('.0o1')}, ".0o1");
+    tx(function () {new BigDecimal('0 o1')}, "0 o1");
+    tx(function () {new BigDecimal('0o 1')}, "0o 1");
+    tx(function () {new BigDecimal('0-o1')}, "0o-1");
+    tx(function () {new BigDecimal('0o1', 16)}, "0o1, 16");
+    tx(function () {new BigDecimal('--45')}, "--45");
+    tx(function () {new BigDecimal('+-2')}, "+-2");
+    tx(function () {new BigDecimal('0 0')}, "0 0");
 
-    t('15', new BigNumber('0xf', 16));
-    t('-10', new BigNumber('-0xa'));
-    t('255', new BigNumber('0xff'));
-    t('-3294', new BigNumber('-0xcde'));
-    t('15.5', new BigNumber('0xf.8'));
+    t('15', new BigDecimal('0xf', 16));
+    t('-10', new BigDecimal('-0xa'));
+    t('255', new BigDecimal('0xff'));
+    t('-3294', new BigDecimal('-0xcde'));
+    t('15.5', new BigDecimal('0xf.8'));
 
-    t('1', new BigNumber('0b1.', 2));
-    t('0', new BigNumber('0b0'));
-    t('-1', new BigNumber('-0b1'));
-    t('3', new BigNumber('0b11'));
-    t('-11', new BigNumber('-0b1011'));
-    t('1.5', new BigNumber('0b1.1'));
+    t('1', new BigDecimal('0b1.', 2));
+    t('0', new BigDecimal('0b0'));
+    t('-1', new BigDecimal('-0b1'));
+    t('3', new BigDecimal('0b11'));
+    t('-11', new BigDecimal('-0b1011'));
+    t('1.5', new BigDecimal('0b1.1'));
 
-    t('-1', new BigNumber('   -0o1  ', 8));
-    t('0', new BigNumber('-0o0'));
-    t('1', new BigNumber('0o1'));
-    t('63', new BigNumber('0o77'));
-    t('-102', new BigNumber('-0o146'));
-    t('0.5', new BigNumber('0o0.4'));
+    t('-1', new BigDecimal('   -0o1  ', 8));
+    t('0', new BigDecimal('-0o0'));
+    t('1', new BigDecimal('0o1'));
+    t('63', new BigDecimal('0o77'));
+    t('-102', new BigDecimal('-0o146'));
+    t('0.5', new BigDecimal('0o0.4'));
 
-    t('0', new BigNumber({ s: 1, e: 0, c: [0], _isBigNumber: true }));
-    t('0', new BigNumber({ s: -1, e: 0, c: [0], _isBigNumber: true }));
-    t('1', new BigNumber({ s: 1, e: 0, c: [1], _isBigNumber: true }));
-    t('-1', new BigNumber({ s: -1, e: 0, c: [1], _isBigNumber: true }));
+    t('0', new BigDecimal({ s: 1, e: 0, c: [0], _isBigNumber: true }));
+    t('0', new BigDecimal({ s: -1, e: 0, c: [0], _isBigNumber: true }));
+    t('1', new BigDecimal({ s: 1, e: 0, c: [1], _isBigNumber: true }));
+    t('-1', new BigDecimal({ s: -1, e: 0, c: [1], _isBigNumber: true }));
 
-    t('99999999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999], _isBigNumber: true }));
-    t('-99999999999999', new BigNumber({ s: -1, e: 13, c: [99999999999999], _isBigNumber: true }));
-    t('100000000000000', new BigNumber({ s: 1, e: 14, c: [1], _isBigNumber: true }));
-    t('-100000000000000', new BigNumber({ s: -1, e: 14, c: [1], _isBigNumber: true }));
+    t('99999999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999], _isBigNumber: true }));
+    t('-99999999999999', new BigDecimal({ s: -1, e: 13, c: [99999999999999], _isBigNumber: true }));
+    t('100000000000000', new BigDecimal({ s: 1, e: 14, c: [1], _isBigNumber: true }));
+    t('-100000000000000', new BigDecimal({ s: -1, e: 14, c: [1], _isBigNumber: true }));
 
-    t('99999999999999.9', new BigNumber({ s: 1, e: 13, c: [99999999999999, 90000000000000], _isBigNumber: true }));
-    t('99999999999999.99', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99000000000000], _isBigNumber: true }));
-    t('99999999999999.999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99900000000000], _isBigNumber: true }));
-    t('99999999999999.9999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99990000000000], _isBigNumber: true }));
-    t('99999999999999.99999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999000000000], _isBigNumber: true }));
-    t('99999999999999.999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999900000000], _isBigNumber: true }));
-    t('99999999999999.9999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999990000000], _isBigNumber: true }));
-    t('99999999999999.99999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999000000], _isBigNumber: true }));
-    t('99999999999999.999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999900000], _isBigNumber: true }));
-    t('99999999999999.9999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999990000], _isBigNumber: true }));
-    t('99999999999999.99999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999999000], _isBigNumber: true }));
-    t('99999999999999.999999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999999900], _isBigNumber: true }));
-    t('99999999999999.9999999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999999990], _isBigNumber: true }));
-    t('99999999999999.99999999999999', new BigNumber({ s: 1, e: 13, c: [99999999999999, 99999999999999], _isBigNumber: true }));
-    t('99999999999999.00000000000009', new BigNumber({ s: 1, e: 13, c: [99999999999999,               9], _isBigNumber: true }));
+    t('99999999999999.9', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 90000000000000], _isBigNumber: true }));
+    t('99999999999999.99', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99000000000000], _isBigNumber: true }));
+    t('99999999999999.999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99900000000000], _isBigNumber: true }));
+    t('99999999999999.9999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99990000000000], _isBigNumber: true }));
+    t('99999999999999.99999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999000000000], _isBigNumber: true }));
+    t('99999999999999.999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999900000000], _isBigNumber: true }));
+    t('99999999999999.9999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999990000000], _isBigNumber: true }));
+    t('99999999999999.99999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999000000], _isBigNumber: true }));
+    t('99999999999999.999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999900000], _isBigNumber: true }));
+    t('99999999999999.9999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999990000], _isBigNumber: true }));
+    t('99999999999999.99999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999999000], _isBigNumber: true }));
+    t('99999999999999.999999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999999900], _isBigNumber: true }));
+    t('99999999999999.9999999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999999990], _isBigNumber: true }));
+    t('99999999999999.99999999999999', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 99999999999999], _isBigNumber: true }));
+    t('99999999999999.00000000000009', new BigDecimal({ s: 1, e: 13, c: [99999999999999,               9], _isBigNumber: true }));
 
-    t('99999999999999.123456789876543', new BigNumber({ s: 1, e: 13, c: [99999999999999, 12345678987654, 30000000000000], _isBigNumber: true }));
+    t('99999999999999.123456789876543', new BigDecimal({ s: 1, e: 13, c: [99999999999999, 12345678987654, 30000000000000], _isBigNumber: true }));
 
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [99999999999999, 12345678987654, 30000000000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [9999999999999, 91234567898765, 43000000000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [999999999999, 99123456789876, 54300000000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [99999999999, 99912345678987, 65430000000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [9999999999, 99991234567898, 76543000000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [999999999, 99999123456789, 87654300000000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [99999999, 99999912345678, 98765430000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [99999999999999, 12345678987654, 30000000000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [9999999999999, 91234567898765, 43000000000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [999999999999, 99123456789876, 54300000000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [99999999999, 99912345678987, 65430000000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [9999999999, 99991234567898, 76543000000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [999999999, 99999123456789, 87654300000000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [99999999, 99999912345678, 98765430000000], _isBigNumber: true }));  // malformed
 
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [9999999, 99999991234567, 89876543000000], _isBigNumber: true }));  // well-formed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [9999999, 99999991234567, 89876543000000], _isBigNumber: true }));  // well-formed
 
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [999999, 99999999123456, 78987654300000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [99999, 99999999912345, 67898765430000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [9999, 99999999991234, 56789876543000], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [999, 99999999999123, 45678987654300], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [99, 99999999999912, 34567898765430], _isBigNumber: true }));  // malformed
-    t('9999999.9999999123456789876543', new BigNumber({ s: 1, e: 6, c: [9, 99999999999991, 23456789876543], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [999999, 99999999123456, 78987654300000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [99999, 99999999912345, 67898765430000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [9999, 99999999991234, 56789876543000], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [999, 99999999999123, 45678987654300], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [99, 99999999999912, 34567898765430], _isBigNumber: true }));  // malformed
+    t('9999999.9999999123456789876543', new BigDecimal({ s: 1, e: 6, c: [9, 99999999999991, 23456789876543], _isBigNumber: true }));  // malformed
 
-    t('9999999999999912345678.9876543', new BigNumber({ s: 1, e: 21, c: [99999999, 99999912345678, 98765430000000], _isBigNumber: true }));  // well-formed
+    t('9999999999999912345678.9876543', new BigDecimal({ s: 1, e: 21, c: [99999999, 99999912345678, 98765430000000], _isBigNumber: true }));  // well-formed
 
-    t('100002222.2222333322', new BigNumber({ s: 1, e: 8, c: [100002222, 22223333220000], _isBigNumber: true }));
-    t('7777777777.123123123', new BigNumber({ s: 1, e: 9, c: [7777777777, 12312312300000], _isBigNumber: true }));
+    t('100002222.2222333322', new BigDecimal({ s: 1, e: 8, c: [100002222, 22223333220000], _isBigNumber: true }));
+    t('7777777777.123123123', new BigDecimal({ s: 1, e: 9, c: [7777777777, 12312312300000], _isBigNumber: true }));
 
-    t('NaN', new BigNumber({ s: null, e: null, c: null, _isBigNumber: true }))
-    t('Infinity', new BigNumber({ s: 1, e: null, c: null, _isBigNumber: true }))
-    t('-Infinity', new BigNumber({ s: -1, e: null, c: null, _isBigNumber: true }))
+    t('NaN', new BigDecimal({ s: null, e: null, c: null, _isBigNumber: true }))
+    t('Infinity', new BigDecimal({ s: 1, e: null, c: null, _isBigNumber: true }))
+    t('-Infinity', new BigDecimal({ s: -1, e: null, c: null, _isBigNumber: true }))
 
     // Base-conversion tests
 
@@ -263,7 +263,7 @@ Test('bigNumber', function () {
 
     t = function (expected, value, base) {
         //if (base) BigNumber.config({ ALPHABET: alphabet.slice(0, base) });
-        Test.areEqual(expected, new BigNumber(value, base).toString())
+        Test.areEqual(expected, new BigDecimal(value, base).toString())
     }
 
     // Test integers of all bases against Number.toString(base).
@@ -284,43 +284,43 @@ Test('bigNumber', function () {
     // Test numbers with fraction digits
 
     // Test rounding.
-    BigNumber.config({DECIMAL_PLACES: 0, ROUNDING_MODE: 0});
+    BigDecimal.config({DECIMAL_PLACES: 0, ROUNDING_MODE: 0});
     t('1', '0.1', 2);
     t('-1', '-0.1', 2);
     t('1000', '999.5', 10);
     t('-1000', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 1});
+    BigDecimal.config({ROUNDING_MODE: 1});
     t('0', '0.1', 2);
     t('0', '-0.1', 2);
     t('999', '999.5', 10);
     t('-999', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 2});
+    BigDecimal.config({ROUNDING_MODE: 2});
     t('1', '0.1', 2);
     t('0', '-0.1', 2);
     t('1000', '999.5', 10);
     t('-999', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 3});
+    BigDecimal.config({ROUNDING_MODE: 3});
     t('0', '0.1', 2);
     t('-1', '-0.1', 2);
     t('999', '999.5', 10);
     t('-1000', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 4});
+    BigDecimal.config({ROUNDING_MODE: 4});
     t('1', '0.1', 2);
     t('-1', '-0.1', 2);
     t('1000', '999.5', 10);
     t('-1000', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 5});
+    BigDecimal.config({ROUNDING_MODE: 5});
     t('0', '0.1', 2);
     t('0', '-0.1', 2);
     t('999', '999.5', 10);
     t('-999', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 6});
+    BigDecimal.config({ROUNDING_MODE: 6});
     t('0', '0.1', 2);
     t('0', '-0.1', 2);
     t('1000', '999.5', 10);
@@ -330,19 +330,19 @@ Test('bigNumber', function () {
     t('1000', '999.500001', 10);
     t('-1000', '-999.500001', 10);
 
-    BigNumber.config({ROUNDING_MODE: 7});
+    BigDecimal.config({ROUNDING_MODE: 7});
     t('1', '0.1', 2);
     t('0', '-0.1', 2);
     t('1000', '999.5', 10);
     t('-999', '-999.5', 10);
 
-    BigNumber.config({ROUNDING_MODE: 8});
+    BigDecimal.config({ROUNDING_MODE: 8});
     t('0', '0.1', 2);
     t('-1', '-0.1', 2);
     t('999', '999.5', 10);
     t('-1000', '-999.5', 10);
 
-    BigNumber.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 3});
+    BigDecimal.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 3});
     t('546141272243.39871532041499605905', '111111100101000100011100111100010110011.011001100001001000110101000011011001100010111000110000101011000010100010110111100010010000011010100100001111010010100', 2);
     t('-761392382117509615082995635394.835132598876953125', '-1001100111000011000100000100010111000100100100101110010100101000000110101101100101101101010011000010.110101011100101101000', 2);
     t('18181', '100011100000101.00', 2);
@@ -360,7 +360,7 @@ Test('bigNumber', function () {
     t('517236958880385002164572266126922644', '11000111001110111000000001111111110000110111101111101110011100111000000111101011000000001100011110010000101001110010100', 2);
     t('-21553306071707458208211095787817816237164981584743591.29723221556402690258', '-111001100110110101111011010110011000011000100110010000110101110110101011101011100001010010101000000110111100101000110100111001000111001101111100100110111001010100110010100111.01001100000101110110100100010101001010100100010100101', 2);
 
-    BigNumber.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 6});
+    BigDecimal.config({DECIMAL_PLACES: 20, ROUNDING_MODE: 6});
     t('90182851032808914967166718343839124510737262515334936.05372908711433410645', '11110001000010011001110001010101001001001000011011110000101001011001110011010100000001001000011000010101101101000111110111101000001101000101100000101011100110000010111100011000.0000110111000001001100001', 2);
     t('-328.28125', '-101001000.010010', 2);
     t('606266547022938105478897519250152.63383591632958904971', '1110111100100001010001101110110111100101000011011110001111001011010010100111110100011000101110100101011101000.1010001001000011000100100001001110101010011100000110001', 2);
@@ -380,7 +380,7 @@ Test('bigNumber', function () {
     t('192.49070453643798828125', '11000000.01111101100111101101000', 2);
     t('-1379984360196.47138547711438150145', '-10100000101001101011110100100001100000100.01111000101011001011011111111000000001', 2);
 
-    BigNumber.config({DECIMAL_PLACES: 40, ROUNDING_MODE: 2});
+    BigDecimal.config({DECIMAL_PLACES: 40, ROUNDING_MODE: 2});
     t('-729.0001524157902758725803993293705227861606', '-1000000.00000001', 3);
     t('-4096.0000152587890625', '-1000000.00000001', 4);
     t('-15625.00000256', '-1000000.00000001', 5);
@@ -416,40 +416,40 @@ Test('bigNumber', function () {
     t('-1838265625.0000000000004440743054270216786320984887', '-1000000.00000001', 35);
     t('-2176782336.0000000000003544704151217464391770978328', '-1000000.00000001', 36);
 
-    BigNumber.config({DECIMAL_PLACES: 51, ROUNDING_MODE: 4});
+    BigDecimal.config({DECIMAL_PLACES: 51, ROUNDING_MODE: 4});
     t('1072424547177.982891327541533302850175278158817253467459228776101', 'donxvwix.zdts', 36);
 
-    BigNumber.config({DECIMAL_PLACES: 86});
+    BigDecimal.config({DECIMAL_PLACES: 86});
     t('824178538787196749922434027872451367594239056.93473392033316110609748881918323116875731371037529199959272159196515804304815690839727', '402kfhkd37bt5n8scr1ir9ndlrnipig.s17oe7rkhi91bh', 30);
 
-    BigNumber.config({DECIMAL_PLACES: 84});
+    BigDecimal.config({DECIMAL_PLACES: 84});
     t('9560389177469634483515162.499335215204179931606951906984830542647805834768203380512715304247460734647288652625', '195qdkkqsa8shmhp9e.edr89', 29);
 
-    BigNumber.config({DECIMAL_PLACES: 65});
+    BigDecimal.config({DECIMAL_PLACES: 65});
     t('5955289028666603391738616069969.70235175643053599414353772852590894151261634747374296179598348968', '8qp28dk3js2iqksmqaqnq.lntnif5qh', 31);
 
-    BigNumber.config({DECIMAL_PLACES: 49});
+    BigDecimal.config({DECIMAL_PLACES: 49});
     t('27603501710202437282037.4945845176631161140013607910579053986520224457133', '42545302442500101544532043113.254455200225412543300022520330204033', 6);
 
-    BigNumber.config({DECIMAL_PLACES: 39});
+    BigDecimal.config({DECIMAL_PLACES: 39});
     t('9464300204295306111422098057.77248824166891668678144149703717008528', '25473f3dbce5cf3hg8318d7.dg52d120b14ea966a7ag06a2gh03', 18);
 
-    BigNumber.config({DECIMAL_PLACES: 15});
+    BigDecimal.config({DECIMAL_PLACES: 15});
     t('133262758349237628352120716402.993431117739119', '3bkobquqthhfbndsmv3i.vp8o0sc4ldtji02mmgqr7blpdjgk', 32);
 
-    BigNumber.config({DECIMAL_PLACES: 65});
+    BigDecimal.config({DECIMAL_PLACES: 65});
     t('171510920999634527633.53051379043557196404057602235264411208736518600450525086556631034', '1fqecn4264r1is.ijur8yj41twl9', 35);
 
-    BigNumber.config({DECIMAL_PLACES: 48});
+    BigDecimal.config({DECIMAL_PLACES: 48});
     t('325927753012307620476767402981591827744994693483231017778102969592507', 'c16de7aa5bf90c3755ef4dea45e982b351b6e00cd25a82dcfe0646abb', 16);
 
-    BigNumber.config({DECIMAL_PLACES: 48});
+    BigDecimal.config({DECIMAL_PLACES: 48});
     t('72783.559378210242248003991012349918599484318629885897', '11c4f.8f33690f15e13146d99092446da', 16);
 
-    BigNumber.config({DECIMAL_PLACES: 81});
+    BigDecimal.config({DECIMAL_PLACES: 81});
     t('8535432796511493691316991730196733707212461.36382685871580896850891461623808', '9l0ah4mf8a0kcgn44oji4kh7l6fbenb.929jlggo43612jfn', 25);
 
-    BigNumber.config({DECIMAL_PLACES: 7});
+    BigDecimal.config({DECIMAL_PLACES: 7});
     t('0', '0', 2);
     t('3', '3', 24);
     t('0.037037', '0.1', 27);
@@ -458,58 +458,58 @@ Test('bigNumber', function () {
     t('2126934655697951.030303', '11111111111.1111111111111', 34);
     t('-288494149172542947905560340081675757349.9789739', '-P98IJYP96JHYP95DPHJWPH09Y.Y98HO8WH58HW', 35);
 
-    BigNumber.config({DECIMAL_PLACES: 31});
+    BigDecimal.config({DECIMAL_PLACES: 31});
     t('4060090888512781039564383580983002345701981946441239.3428571428571428571428571428571', '4hv6vl92gvkmumr0a6ley0dhkwmwfe35oo.c', 35);
 
-    BigNumber.config({DECIMAL_PLACES: 90});
+    BigDecimal.config({DECIMAL_PLACES: 90});
     t('20398136837.975941624007641435905199481124700109083958314345873245346912136478926756110974638825468924', '5MI4K5MF.MA66B0L4HK8DK35LI3D0G9JFF7LBB27LAKH3E4FCEJM', 23);
 
-    BigNumber.config({DECIMAL_PLACES: 38});
+    BigDecimal.config({DECIMAL_PLACES: 38});
     t('42689628837110945219.60963984922125154547359100149049425936', 'D37AFB2193DJ265.CGHI7F1BK1I9GJ', 21);
 
-    BigNumber.config({DECIMAL_PLACES: 59});
+    BigDecimal.config({DECIMAL_PLACES: 59});
     t('893835640746065892983175797034880314945754459977061255725623898879842611', '4231231434203102220114420330232412332321132204022241104411014023324140104333412232222433424401214430421', 5);
 
-    BigNumber.config({DECIMAL_PLACES: 100});
+    BigDecimal.config({DECIMAL_PLACES: 100});
     t('175', '67', 28);
 
-    BigNumber.config({DECIMAL_PLACES: 59});
+    BigDecimal.config({DECIMAL_PLACES: 59});
     t('683674717563732788139425742102304147', '23BXVQVK5NK29XCNPM7JWQQC', 35);
 
-    BigNumber.config({DECIMAL_PLACES: 63});
+    BigDecimal.config({DECIMAL_PLACES: 63});
     t('21872738004815869.777777777777777777777777777777777777777777777777777777777777778', 'E8NB0D88AN2D.IG', 24);
 
-    BigNumber.config({DECIMAL_PLACES: 2});
+    BigDecimal.config({DECIMAL_PLACES: 2});
     t('4839094569478687835499021764036676797809986482983355.46', '9G041CFCPN92FSECBIHHL1F1I74FJMGAKTR.EAJ7JQ', 31);
 
-    BigNumber.config({DECIMAL_PLACES: 2});
+    BigDecimal.config({DECIMAL_PLACES: 2});
     t('198496092814270915085258754228681831655498041942', '24310400201333231203024322334002413400114320223240014320424444320232', 5);
 
-    BigNumber.config({DECIMAL_PLACES: 5});
+    BigDecimal.config({DECIMAL_PLACES: 5});
     t('7371249.07083', '93089.23M993NGABNLEP', 30);
 
-    BigNumber.config({DECIMAL_PLACES: 47});
+    BigDecimal.config({DECIMAL_PLACES: 47});
     t('799580158552527670.51524163982781306375625835799992154433181428013', '1C5C994CD5A7E49A.7ADE19484CE921B8EE7', 15);
 
-    BigNumber.config({DECIMAL_PLACES: 64});
+    BigDecimal.config({DECIMAL_PLACES: 64});
     t('16165422251964685360633312857381850497426314130782805.0722805578590765752365085976081394656988159695365026477063128458', '184254BE3B14F86L7HPKEOIIJKHCQ3DDBCPG5.20IJJ', 28);
 
-    BigNumber.config({DECIMAL_PLACES: 66});
+    BigDecimal.config({DECIMAL_PLACES: 66});
     t('321903599394345741344181790866033344020400577177.313819548430693134687858394581066124770210878514089611637812764975', 'GKE2D93H4K55C41EA627I1867CEFFCHBHE8I.6C85JF7D0BFDJFK4K', 21);
 
-    BigNumber.config({DECIMAL_PLACES: 38});
+    BigDecimal.config({DECIMAL_PLACES: 38});
     t('66906978329149775053912152738679.85034153550858840284188803538614532877', '2011110022202010100200021000121022200222101110012102220102212010111.21122122002110012111112102002110221102120102', 3);
 
-    BigNumber.config({DECIMAL_PLACES: 49});
+    BigDecimal.config({DECIMAL_PLACES: 49});
     t('1334535467.5658391510074236740492770511046811319813437111801', '45033235646.365040260503443445435151335014', 7);
 
-    BigNumber.config({DECIMAL_PLACES: 62});
+    BigDecimal.config({DECIMAL_PLACES: 62});
     t('26234523211578269977959969', 'LMDG5KNKLAUCSCNH1.0', 32);
 
-    BigNumber.config({DECIMAL_PLACES: 21});
+    BigDecimal.config({DECIMAL_PLACES: 21});
     t('572315667420.390625', '10250053005734.31', 8);
 
-    BigNumber.config({DECIMAL_PLACES: 0});
+    BigDecimal.config({DECIMAL_PLACES: 0});
     t('135378457250661080667637636173904073793598540954140', '1002012000221022001212121111002202200112011211012200211202012002222102020101100001022121022011000222110010.012011121', 3);
     t('19121180169114878494408529193061279888621355', '30130433145052134410320001411315120554033203511455405455', 6);
     t('121756633', '1I0JBBC.F628AF202451951181911H3HGID95I855056I', 20);
@@ -568,30 +568,30 @@ Test('bigNumber', function () {
     //BigNumber.config({DECIMAL_PLACES: 5000});
     //t('6022239845523628300792137851333617197616053606580805361460444571405159915948416057193556599026984420186847535714193186506779546.45562364433149048376909884425264838196627845956471301832353037216028002220557941081995561235866533298815815922678466806108234749212464649692584770778636508682771855319769124974649405509297732509500507702362168384314107653609786430967640203107454687605887412794096157913528626853706056446855881531545195000734665133919578058463901659136523244159808597378906266443321758454939816465192126295342280568880123960605134416002321981988529228618898697072789772080291342478304351440847738944612720456898241717924298967008171252854355869450188166408302699162551054528159131912895298938197347616702659802404073209181609536327921587288300421033874114565425368107966522446454855931005917304136935908432754883056828263061549088965135169569684456008477541982066123091033968877584432281431379815341125413388350665252537980749041131051878291040173564632382596634048981529497244126378198699352829834835751033446902713765443032376617851981166182096456938914400530557912226087362980440980578460246231055456778104006415527727260144095903127275419414807349147304707405254543427544838982731455334927521421806120799785694323203756123916853431908716090161389876298981034132804663437564753354768639621168658600102486177710685317251506858936381061516323456154147708084807303368146788089168077930658523442473995088742325773226839695051398002486616767897842485900547744342133455226785895506239035265653618936400640974168752824304125514038750444312714907633618171991355429431759439952307076477817217105979944570733869770158307019913889590797598165139754807215433076623400151503800862360578168290788982250598565524133502841168163050960633073023086590377971028607254136702588526777419958903274032568187324150715013909702207304519885442684246154424782763896029535730853643906929626045280406345718447643848365642454794436200184559384104514455046474916698853542487141393373504315472859932883938412782930021292976807483126232761531618262529099148770786402625394165285080740814372385937680961636708062338551092904431743317072664203085901678724391714803254679215220462002284827189814215842974479924985602985736840346662287388320297983891277984351215430795679480190118537345626368022990139894769505155754558312126932952671414774316202379066527423168541384888466209214314154656662254580694814197800298638656821314275995533216305058772309199532434503635943016121377240397454883296750491850460737680808149474215115525147893924328495593024234124241923099439564731922184295950348564035465169266840591302330909689592731054406376096204521212856678638595326253266853596009793769540552472576546585623610514603873467842223218383413469519311698301974531524237384072650293621563877939654382136609518592602998975525783497411981332278754077646791148254910680215716571959847794999990247155904843380251881145330210230503708687521912940355094829433297671479621259952291050451507069861516277689852652120824074226408244695466776128994445706937283501626742574832399257358784925070613374733443923318045672485243752481960132066316477982467772782652564401225093039509921674057244503251628994886108332809253787838807087045292349084813153418737514141651084390353861740493248726168058140952618277156388955744920898401233144729995305891815236381631092752549773465825925187270747564816278320933350674627641648384663562427197990911234109442852754919229966716090476391048342193483833862003532792898637819146892137188859066257902207068814887904172213161571698554092509870791904603500154815868135120390375352892915790562057269104998986616170310087063962096170912045311169499205938470776723319613174250097225084425676690856982407000880056724620818824503061125725461684399498255127313452269964097609152404362732856503883361007911375417900940044634592803539714125533402906835228146503351037643506565226937040944039386627046902360157120659188931448110133381205133170527455488802527077001776856346493147507947490287029277744578775527372923256995419864299678429507426389922953403127483507515479327442988251888961453922972301510643563216583092771781978061366034284974632235631032912241967179283080214267387399797724014498036440569206078211810225217786455419707373248180986740603131905953623973926533609693886155905704306604100315482559358455550018630679789876126218887092040393676456180793809957296390894821682732929521075917502388856575712596709103037671223414578669707747332478371632108168893761388532592606235363056704156483680099201459584177626289636906715420355110405019316492710052426228518585155223882424429151702414484321844004913577523588611847871639322325737509992577988369672218344719659244872142799432036756062631109614278597717292745716623038732618863518899700937188424653264323754203446589769545236970901181775744966400800101730416875793459251675109469665985644198416152029852905095989068691042302222376893958470550095432860142880876451168971479312433163514921818509750264250472945722655641064950528004153004188190549429918759335822341644887168398385954219498973215722761336436971169084930492144143419812959401754073906781284401436962270645729138821367459312144327', '58LURTSHGLIURSHG8O7YH8OG754YOG8O7YGYG75EOY5EYGO87EYOG87YG407Y87Y1IUHJROLIGKHGERGRE.GEHKRGUERYG0908Y76981YIUGHFIJVRBKOFUHEWO8T9343097', 36);
 
-    BigNumber.config({DECIMAL_PLACES: 20});
+    BigDecimal.config({DECIMAL_PLACES: 20});
 
-    tx(function () {new BigNumber(1010101010101010, 2).toString()}, "(1010101010101010, 2)");
-    tx(function () {new BigNumber('2', 0).toString()}, "('2', 0)");
-    tx(function () {new BigNumber('2', 2).toString()}, "('2', 2)");
-    tx(function () {new BigNumber('2', '-2').toString()}, "('2', '-2')");
-    tx(function () {new BigNumber('0.000g', 16).toString()}, "('0.000g', 16)");
-    tx(function () {new BigNumber('453.43', 4).toString()}, "('453.43', 4)");
-    tx(function () {new BigNumber('1', 1).toString()}, "('1', 1)");
-    tx(function () {new BigNumber('1.23', 36.01).toString()}, "('1.23', 36.01)");
-    tx(function () {new BigNumber('1.23', 65).toString()}, "('1.23', 65)");
+    tx(function () {new BigDecimal(1010101010101010, 2).toString()}, "(1010101010101010, 2)");
+    tx(function () {new BigDecimal('2', 0).toString()}, "('2', 0)");
+    tx(function () {new BigDecimal('2', 2).toString()}, "('2', 2)");
+    tx(function () {new BigDecimal('2', '-2').toString()}, "('2', '-2')");
+    tx(function () {new BigDecimal('0.000g', 16).toString()}, "('0.000g', 16)");
+    tx(function () {new BigDecimal('453.43', 4).toString()}, "('453.43', 4)");
+    tx(function () {new BigDecimal('1', 1).toString()}, "('1', 1)");
+    tx(function () {new BigDecimal('1.23', 36.01).toString()}, "('1.23', 36.01)");
+    tx(function () {new BigDecimal('1.23', 65).toString()}, "('1.23', 65)");
 
-    tx(function () {new BigNumber(12.345, NaN).toString()}, "(12.345, NaN)");
-    tx(function () {new BigNumber(12.345, 'NaN').toString()}, "(12.345, 'NaN')");
-    tx(function () {new BigNumber(12.345, []).toString()}, "(12.345, [])");
-    tx(function () {new BigNumber(12.345, {}).toString()}, "(12.345, {})");
-    tx(function () {new BigNumber(12.345, '').toString()}, "(12.345, '')");
-    tx(function () {new BigNumber(12.345, ' ').toString()}, "(12.345, ' ')");
-    tx(function () {new BigNumber(12.345, 'hello').toString()}, "(12.345, 'hello')");
-    tx(function () {new BigNumber(12.345, '\t').toString()}, "(12.345, '\t')");
-    tx(function () {new BigNumber(12.345, new Date).toString()}, "(12.345, new Date)");
-    tx(function () {new BigNumber(12.345, new RegExp).toString()}, "(12.345, new RegExp)");
-    tx(function () {new BigNumber(101, 2.02).toString()}, "(101, 2.02)");
-    tx(function () {new BigNumber(12.345, 10.5).toString()}, "(12.345, 10.5)");
+    tx(function () {new BigDecimal(12.345, NaN).toString()}, "(12.345, NaN)");
+    tx(function () {new BigDecimal(12.345, 'NaN').toString()}, "(12.345, 'NaN')");
+    tx(function () {new BigDecimal(12.345, []).toString()}, "(12.345, [])");
+    tx(function () {new BigDecimal(12.345, {}).toString()}, "(12.345, {})");
+    tx(function () {new BigDecimal(12.345, '').toString()}, "(12.345, '')");
+    tx(function () {new BigDecimal(12.345, ' ').toString()}, "(12.345, ' ')");
+    tx(function () {new BigDecimal(12.345, 'hello').toString()}, "(12.345, 'hello')");
+    tx(function () {new BigDecimal(12.345, '\t').toString()}, "(12.345, '\t')");
+    tx(function () {new BigDecimal(12.345, new Date).toString()}, "(12.345, new Date)");
+    tx(function () {new BigDecimal(12.345, new RegExp).toString()}, "(12.345, new RegExp)");
+    tx(function () {new BigDecimal(101, 2.02).toString()}, "(101, 2.02)");
+    tx(function () {new BigDecimal(12.345, 10.5).toString()}, "(12.345, 10.5)");
 
     t('NaN', 'NaN', undefined);
     t('NaN', 'NaN', null);
@@ -614,23 +614,23 @@ Test('bigNumber', function () {
     //     T.areEqual(expected, new BigNumber(value, base).toString())
     // }
 
-    BigNumber.config({ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$_'});
+    BigDecimal.config({ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$_'});
 
     t('635356108986960269840155289238139379273453551922021969747464031737829471932451727645074552025138332075241803866047', '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$_', 64);
     t('64163.091552734375', 'fGz.5T', 64);
 
-    BigNumber.config({ALPHABET: 'xy'});
+    BigDecimal.config({ALPHABET: 'xy'});
 
     t('1', 'y', 2);    // 1
     t('2', 'yx', 2);   // 10
     t('3', 'yy', 2);   // 11
     t('4', 'yxx', 2);  // 100
     t('5', 'yxy', 2);  // 101
-    
-    t('2', 'YX', 2);   // 10
-    tx(function () {new BigNumber('xX', 2).toString()}, "('xX', 2)");
 
-    BigNumber.config({ALPHABET: '0123456789*#'});
+    t('2', 'YX', 2);   // 10
+    tx(function () {new BigDecimal('xX', 2).toString()}, "('xX', 2)");
+
+    BigDecimal.config({ALPHABET: '0123456789*#'});
 
     t('10', '*', 12);
     t('11', '#', 12);
@@ -640,5 +640,5 @@ Test('bigNumber', function () {
 
     // TODO: more ALPHABET tests.
 
-    BigNumber.config({ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyz'});
+    BigDecimal.config({ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyz'});
 });

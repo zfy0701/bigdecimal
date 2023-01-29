@@ -4,10 +4,10 @@ Test('integerValue', function () {
     var MAX = 1e9;
 
     function t(expected, value, roundingMode) {
-        Test.areEqual(String(expected), new BigNumber(String(value)).integerValue(roundingMode).toString());
+        Test.areEqual(String(expected), new BigDecimal(String(value)).integerValue(roundingMode).toString());
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 7,
         RANGE: 1E9,
@@ -89,7 +89,7 @@ Test('integerValue', function () {
     t(-9007199254740990, -9007199254740990);
     t(-9007199254740991, -9007199254740991);
 
-    BigNumber.config({EXPONENTIAL_AT: 100});
+    BigDecimal.config({EXPONENTIAL_AT: 100});
 
     t(Number.MAX_VALUE, Number.MAX_VALUE);
     t(-Number.MAX_VALUE, -Number.MAX_VALUE);
@@ -180,7 +180,7 @@ Test('integerValue', function () {
     t(min_smi32, min_smi32 - 0.5);
     t(min_smi32 + 1, min_smi32 + 0.5);
 
-    BigNumber.config({EXPONENTIAL_AT: 1E9});
+    BigDecimal.config({EXPONENTIAL_AT: 1E9});
 
     t('0', '0');
     t('0', '-0');
@@ -642,26 +642,26 @@ Test('integerValue', function () {
     t('13', '12.345', -0);
 
 
-    Test.isException(function () {new BigNumber('12.345').integerValue(NaN)}, ".integerValue(NaN)");
-    Test.isException(function () {new BigNumber('12.345').integerValue('NaN')}, ".integerValue('NaN')");
-    Test.isException(function () {new BigNumber('12.345').integerValue([])}, ".integerValue([])");
-    Test.isException(function () {new BigNumber('12.345').integerValue({})}, ".integerValue({})");
-    Test.isException(function () {new BigNumber('12.345').integerValue('')}, ".integerValue('')");
-    Test.isException(function () {new BigNumber('12.345').integerValue(' ')}, ".integerValue(' ')");
-    Test.isException(function () {new BigNumber('12.345').integerValue('hello')}, ".integerValue('hello')");
-    Test.isException(function () {new BigNumber('12.345').integerValue('\t')}, ".integerValue('\t')");
-    Test.isException(function () {new BigNumber('12.345').integerValue(new Date)}, ".integerValue(new Date)");
-    Test.isException(function () {new BigNumber('12.345').integerValue(new RegExp)}, ".integerValue(new RegExp)");
-    Test.isException(function () {new BigNumber('12.345').integerValue(7.5)}, ".integerValue(7.5)");
-    Test.isException(function () {new BigNumber('12.345').integerValue('-1.1e1')}, ".integerValue('-1.1e1')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(NaN)}, ".integerValue(NaN)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('NaN')}, ".integerValue('NaN')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue([])}, ".integerValue([])");
+    Test.isException(function () {new BigDecimal('12.345').integerValue({})}, ".integerValue({})");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('')}, ".integerValue('')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(' ')}, ".integerValue(' ')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('hello')}, ".integerValue('hello')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('\t')}, ".integerValue('\t')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(new Date)}, ".integerValue(new Date)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(new RegExp)}, ".integerValue(new RegExp)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(7.5)}, ".integerValue(7.5)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('-1.1e1')}, ".integerValue('-1.1e1')");
 
-    Test.isException(function () {new BigNumber('12.345').integerValue('-1')}, ".integerValue(-1')");
-    Test.isException(function () {new BigNumber('12.345').integerValue(-23)}, ".integerValue(-23)");
-    Test.isException(function () {new BigNumber('12.345').integerValue(8.01)}, ".integerValue(8.01)");
-    Test.isException(function () {new BigNumber('12.345').integerValue(9)}, ".integerValue(9)");
-    Test.isException(function () {new BigNumber('12.345').integerValue(-1)}, ".integerValue(-1)");
-    Test.isException(function () {new BigNumber('12.345').integerValue('-0.01')}, ".integerValue('-0.01')");
-    Test.isException(function () {new BigNumber('12.345').integerValue('-1e-1')}, ".integerValue('-1e-1')");
-    Test.isException(function () {new BigNumber('12.345').integerValue(Infinity)}, ".integerValue(Infinity)");
-    Test.isException(function () {new BigNumber('12.345').integerValue('-Infinity')}, ".integerValue('-Infinity')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('-1')}, ".integerValue(-1')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(-23)}, ".integerValue(-23)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(8.01)}, ".integerValue(8.01)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(9)}, ".integerValue(9)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(-1)}, ".integerValue(-1)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('-0.01')}, ".integerValue('-0.01')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('-1e-1')}, ".integerValue('-1e-1')");
+    Test.isException(function () {new BigDecimal('12.345').integerValue(Infinity)}, ".integerValue(Infinity)");
+    Test.isException(function () {new BigDecimal('12.345').integerValue('-Infinity')}, ".integerValue('-Infinity')");
 });

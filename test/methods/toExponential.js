@@ -4,10 +4,10 @@ Test('toExponential', function () {
     var MAX = 1e9;
 
     function t(expected, value, decimalPlaces){
-        Test.areEqual(String(expected), new BigNumber(value).toExponential(decimalPlaces));
+        Test.areEqual(String(expected), new BigDecimal(value).toExponential(decimalPlaces));
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -102,7 +102,7 @@ Test('toExponential', function () {
     t('1.00e+9', '999702726', 2);
     t('1.000e+3', '999.964717', 3);
 
-    BigNumber.config({ROUNDING_MODE: 0});
+    BigDecimal.config({ROUNDING_MODE: 0});
 
     t('-5.3453435435e+8', '-53453.435435E4', undefined);
     t('-8.8254658100092746334967191957167916942544e+17', '-882546581000927463.34967191957167916942543286', 40);
@@ -176,7 +176,7 @@ Test('toExponential', function () {
     t('-6.02219e+18', '-6022186164465021650.884475588', 5);
     t('-7.790612428288e+18', '-7790612428287383595.5394047', 12);
 
-    BigNumber.config({ROUNDING_MODE: 1});
+    BigDecimal.config({ROUNDING_MODE: 1});
 
     t('0e+0', '-0.0E-0', undefined);
     t('-2.856376815219143184897347685012382222462687620998915470135915e+6', '-2856376.815219143184897347685012382222462687620998915470135915511363444', 60);
@@ -244,7 +244,7 @@ Test('toExponential', function () {
     t('-4.092360120459492827213341546580282588568024330771e+25', '-40923601204594928272133415.465802825885680243307714368088538', 48);
     t('-1.241037736e-28', '-0.00000000000000000000000000012410377364', 9);
 
-    BigNumber.config({ROUNDING_MODE: 2});
+    BigDecimal.config({ROUNDING_MODE: 2});
 
     t('0e+0', '0E0000000000', undefined);
     t('0e+0', '-0E01', undefined);
@@ -342,7 +342,7 @@ Test('toExponential', function () {
     t('-7.2570104326587672213e+16', '-72570104326587672.213076838263780308795144628367752', 19);
     t('-4.445769230869049803541e+15', '-4445769230869049.80354196820931591782233498498378174385', 21);
 
-    BigNumber.config({ROUNDING_MODE: 3});
+    BigDecimal.config({ROUNDING_MODE: 3});
 
     t('-9.99999999000000009e+8', '-999999999.000000009e-0', undefined);
     t('-3.99764422903251220452704763278376060858663250289320247532595e+24', '-3997644229032512204527047.63278376060858663250289320247532594416986984981431156065660613', 59);
@@ -436,7 +436,7 @@ Test('toExponential', function () {
     t('-9.41834953e+18', '-9418349527156084224.2', 8);
     t('-3.19716162829318952418046452988e+13', '-31971616282931.895241804645298754890905582545633', 29);
 
-    BigNumber.config({ROUNDING_MODE: 4});
+    BigDecimal.config({ROUNDING_MODE: 4});
 
     t('-5.002239116605888927178702930656e-39', '-0.00000000000000000000000000000000000000500223911660588892717870293065633642', 30);
     t('-8.52292947230244775435e+29', '-852292947230244775434968241532.494643593912804433318745222587246680109833509655450267792446', 20);
@@ -524,7 +524,7 @@ Test('toExponential', function () {
     t('-7.121660153198989278372512656775647e-11', '-0.0000000000712166015319898927837251265677564651728358', 33);
     t('-7.98924570545536548623603750084330391943e+19', '-79892457054553654862.360375008433039194317394396964358522', 38);
 
-    BigNumber.config({ROUNDING_MODE: 5});
+    BigDecimal.config({ROUNDING_MODE: 5});
 
     t('4.95474614815842e+38', '495474614815842191683004449862568813538.573064401156', 14);
     t('-8.9667567079038139e+16', '-89667567079038139', 16);
@@ -604,7 +604,7 @@ Test('toExponential', function () {
     t('-7.18294352e-11', '-0.0000000000718294352479105', 8);
     t('-3.52454012503419773886785e-25', '-0.000000000000000000000000352454012503419773886785342913143', 23);
 
-    BigNumber.config({ROUNDING_MODE: 6});
+    BigDecimal.config({ROUNDING_MODE: 6});
 
     t('-4.3502707501164e+36', '-4350270750116411997402439304498892819', 13);
     t('9.5e-21', '0.0000000000000000000094520280724178734152', 1);
@@ -684,7 +684,7 @@ Test('toExponential', function () {
     t('-4.06575860462e+17', '-406575860461750182.91372176567693718', 11);
     t('-8.90585675951e+19', '-89058567595113495345', 11);
 
-    BigNumber.config({ROUNDING_MODE: 4});
+    BigDecimal.config({ROUNDING_MODE: 4});
 
     t('-2.033619450856645241153977e+0', '-2.03361945085664524115397653636144859', 24);
     t('1.130e+8', '112955590.0430616', 3);
@@ -717,29 +717,29 @@ Test('toExponential', function () {
     t('1e+2', '12.3e1', 0);
     t('1e+2', '12.3e1', -0);
 
-    Test.isException(function () {new BigNumber('1.23').toExponential(NaN)}, "('1.23').toExponential(NaN)");
-    Test.isException(function () {new BigNumber('1.23').toExponential('NaN')}, "('1.23').toExponential('NaN')");
-    Test.isException(function () {new BigNumber('1.23').toExponential([])}, "('1.23').toExponential([])");
-    Test.isException(function () {new BigNumber('1.23').toExponential({})}, "('1.23').toExponential({})");
-    Test.isException(function () {new BigNumber('1.23').toExponential('')}, "('1.23').toExponential('')");
-    Test.isException(function () {new BigNumber('1.23').toExponential(' ')}, "('1.23').toExponential(' ')");
-    Test.isException(function () {new BigNumber('1.23').toExponential('hello')}, "('1.23').toExponential('hello')");
-    Test.isException(function () {new BigNumber('1.23').toExponential('\t')}, "('1.23').toExponential('\t')");
-    Test.isException(function () {new BigNumber('1.23').toExponential(new Date)}, "('1.23').toExponential(new Date)");
-    Test.isException(function () {new BigNumber('1.23').toExponential(new RegExp)}, "('1.23').toExponential(new RegExp)");
-    Test.isException(function () {new BigNumber('1.23').toExponential(2.01)}, "('1.23').toExponential(2.01)");
-    Test.isException(function () {new BigNumber('1.23').toExponential(10.5)}, "('1.23').toExponential(10.5)");
-    Test.isException(function () {new BigNumber('1.23').toExponential('-1.1e1')}, "('1.23').toExponential('-1.1e1')");
-    Test.isException(function () {new BigNumber('1.23').toExponential(true)}, "('1.23').toExponential(true)");
-    Test.isException(function () {new BigNumber('1.23').toExponential(false)}, "('1.23').toExponential(false)");
-    Test.isException(function () {new BigNumber('1.23').toExponential(function (){})}, "('1.23').toExponential(function (){})");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(NaN)}, "('1.23').toExponential(NaN)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential('NaN')}, "('1.23').toExponential('NaN')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential([])}, "('1.23').toExponential([])");
+    Test.isException(function () {new BigDecimal('1.23').toExponential({})}, "('1.23').toExponential({})");
+    Test.isException(function () {new BigDecimal('1.23').toExponential('')}, "('1.23').toExponential('')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(' ')}, "('1.23').toExponential(' ')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential('hello')}, "('1.23').toExponential('hello')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential('\t')}, "('1.23').toExponential('\t')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(new Date)}, "('1.23').toExponential(new Date)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(new RegExp)}, "('1.23').toExponential(new RegExp)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(2.01)}, "('1.23').toExponential(2.01)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(10.5)}, "('1.23').toExponential(10.5)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential('-1.1e1')}, "('1.23').toExponential('-1.1e1')");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(true)}, "('1.23').toExponential(true)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(false)}, "('1.23').toExponential(false)");
+    Test.isException(function () {new BigDecimal('1.23').toExponential(function (){})}, "('1.23').toExponential(function (){})");
 
-    Test.isException(function () {new BigNumber(12.3).toExponential('-1')}, ".toExponential('-1')");
-    Test.isException(function () {new BigNumber(12.3).toExponential(-23)}, ".toExponential(-23)");
-    Test.isException(function () {new BigNumber(12.3).toExponential(MAX + 1)}, ".toExponential(MAX + 1)");
-    Test.isException(function () {new BigNumber(12.3).toExponential(MAX + 0.1)}, ".toExponential(MAX + 0.1)");
-    Test.isException(function () {new BigNumber(12.3).toExponential(-0.01)}, ".toExponential(-0.01)");
-    Test.isException(function () {new BigNumber(12.3).toExponential('-1e-1')}, ".toExponential('-1e-1')");
-    Test.isException(function () {new BigNumber(12.3).toExponential(Infinity)}, ".toExponential(Infinity)");
-    Test.isException(function () {new BigNumber(12.3).toExponential('-Infinity')}, ".toExponential('-Infinity')");
+    Test.isException(function () {new BigDecimal(12.3).toExponential('-1')}, ".toExponential('-1')");
+    Test.isException(function () {new BigDecimal(12.3).toExponential(-23)}, ".toExponential(-23)");
+    Test.isException(function () {new BigDecimal(12.3).toExponential(MAX + 1)}, ".toExponential(MAX + 1)");
+    Test.isException(function () {new BigDecimal(12.3).toExponential(MAX + 0.1)}, ".toExponential(MAX + 0.1)");
+    Test.isException(function () {new BigDecimal(12.3).toExponential(-0.01)}, ".toExponential(-0.01)");
+    Test.isException(function () {new BigDecimal(12.3).toExponential('-1e-1')}, ".toExponential('-1e-1')");
+    Test.isException(function () {new BigDecimal(12.3).toExponential(Infinity)}, ".toExponential(Infinity)");
+    Test.isException(function () {new BigDecimal(12.3).toExponential('-Infinity')}, ".toExponential('-Infinity')");
 });

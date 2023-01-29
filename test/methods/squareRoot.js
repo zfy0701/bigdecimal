@@ -3,12 +3,12 @@ if (typeof Test === 'undefined') require('../tester');
 Test('squareRoot', function () {
 
     var t = function (root, value) {
-        Test.areEqual(root, new BigNumber(value).squareRoot().toString())
+        Test.areEqual(root, new BigDecimal(value).squareRoot().toString())
     }
 
-    Test.areEqual(BigNumber.prototype.squareRoot, BigNumber.prototype.sqrt);
+    Test.areEqual(BigDecimal.prototype.squareRoot, BigDecimal.prototype.sqrt);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -22,10 +22,10 @@ Test('squareRoot', function () {
     t('2', 4);
     t('0.1', 0.01);
 
-    Test.areEqual('0', new BigNumber(0).sqrt().valueOf());
-    Test.areEqual('0', new BigNumber('0').sqrt().valueOf());
-    Test.areEqual('-0', new BigNumber(-0).sqrt().valueOf());
-    Test.areEqual('-0', new BigNumber('-0').sqrt().valueOf());
+    Test.areEqual('0', new BigDecimal(0).sqrt().valueOf());
+    Test.areEqual('0', new BigDecimal('0').sqrt().valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).sqrt().valueOf());
+    Test.areEqual('-0', new BigDecimal('-0').sqrt().valueOf());
 
     t('Infinity', Infinity);
     t('NaN', -Infinity);
@@ -41,8 +41,8 @@ Test('squareRoot', function () {
     }
 
     t = function (root, value, dp, rm) {
-        BigNumber.config({ DECIMAL_PLACES: dp, ROUNDING_MODE: rm });
-        Test.areEqual(root, new BigNumber(value).sqrt().valueOf());
+        BigDecimal.config({ DECIMAL_PLACES: dp, ROUNDING_MODE: rm });
+        Test.areEqual(root, new BigDecimal(value).sqrt().valueOf());
     };
 
     // Initial rounding tests.
@@ -412,8 +412,8 @@ Test('squareRoot', function () {
     t('0', '1e-324', 0, 4);
     t('1', '1e-324', 0, 0);
 
-    var x = new BigNumber('0.000000009');
-    BigNumber.config({ RANGE: [-4, 1e9] });
+    var x = new BigDecimal('0.000000009');
+    BigDecimal.config({ RANGE: [-4, 1e9] });
     // sqrt(0.000000009) = 0.00009486...
     t('0', x, 5, 4);
 });

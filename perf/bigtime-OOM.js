@@ -124,7 +124,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
     '\n To show memory usage include an argument m or -m' +
     '\n E.g.  node bigtime-OOM m add');
 } else {
-     BigNumber.config({
+     BigDecimal.config({
         EXPONENTIAL_AT: 1E9,
         RANGE: 1E9,
         ERRORS: false,
@@ -181,7 +181,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
     if (bdM == 'divide') {
         rounding = Math.floor(Math.random() * 7);
         console.log('\n Decimal places: %d\n Rounding mode: %d', decimalPlaces, rounding);
-        BigNumber.config({ DECIMAL_PLACES: decimalPlaces, ROUNDING_MODE: rounding });
+        BigDecimal.config({ DECIMAL_PLACES: decimalPlaces, ROUNDING_MODE: rounding });
     }
 
     if (showMemory) {
@@ -240,7 +240,7 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
 
         start = +new Date();
             for (i = 0; i < reps; i++) {
-                bnXs[i] = new BigNumber(Xs[i]);
+                bnXs[i] = new BigDecimal(Xs[i]);
             }
         bnOT = +new Date() - start;
 
@@ -285,8 +285,8 @@ if (arg = args[0], typeof arg != 'undefined' && !isFinite(arg) &&
 
         start = +new Date();
             for (i = 0; i < reps; i++) {
-                bnXs[i] = new BigNumber(Xs[i]);
-                bnYs[i] = new BigNumber(Ys[i]);
+                bnXs[i] = new BigDecimal(Xs[i]);
+                bnYs[i] = new BigDecimal(Ys[i]);
             }
         bnOT = +new Date() - start;
 

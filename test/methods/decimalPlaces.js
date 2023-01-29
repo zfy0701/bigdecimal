@@ -3,9 +3,9 @@ if (typeof Test === 'undefined') require('../tester');
 Test('decimalPlaces', function () {
     var MAX = 1e9;
 
-    Test.areEqual(BigNumber.prototype.decimalPlaces, BigNumber.prototype.dp);
+    Test.areEqual(BigDecimal.prototype.decimalPlaces, BigDecimal.prototype.dp);
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 7,
         RANGE: 1E9,
@@ -15,7 +15,7 @@ Test('decimalPlaces', function () {
     // Return decimal places count
 
     t = function (value, count){
-        Test.areEqual(new BigNumber(value).decimalPlaces(), count);
+        Test.areEqual(new BigDecimal(value).decimalPlaces(), count);
     }
 
     t(0, 0);
@@ -64,7 +64,7 @@ Test('decimalPlaces', function () {
     // Return a new BigNumber with a maximum number of dp decimal places
 
     t = function (expected, value, dp, rm) {
-        Test.areEqual(String(expected), new BigNumber(value).decimalPlaces(dp, rm).valueOf());
+        Test.areEqual(String(expected), new BigDecimal(value).decimalPlaces(dp, rm).valueOf());
     }
 
     t('0', '0.000084888060736883027314038572334303632', 0);
@@ -141,7 +141,7 @@ Test('decimalPlaces', function () {
     t('-9007199254740990', '-9007199254740990', 0);
     t('-9007199254740991', '-9007199254740991', 0);
 
-    BigNumber.config({EXPONENTIAL_AT: 100});
+    BigDecimal.config({EXPONENTIAL_AT: 100});
 
     t('536870911', 536870910.5, 0);
     t('536870911', 536870911, 0);
@@ -189,7 +189,7 @@ Test('decimalPlaces', function () {
     t('-9007199254740991', '-9007199254740991', 0);
     t('-1.7976931348623157e+308', '-1.7976931348623157e+308', 0);
 
-    BigNumber.config({EXPONENTIAL_AT: 1E9});
+    BigDecimal.config({EXPONENTIAL_AT: 1E9});
 
     t('0', 0, 0);
     t('-0', -0, 0);
@@ -1968,27 +1968,27 @@ Test('decimalPlaces', function () {
         Test.isException(fn, msg);
     }
 
-    tx(function () {new BigNumber('12.345').dp(NaN)}, ".dp(NaN)");
-    tx(function () {new BigNumber('12.345').dp('NaN')}, ".dp('NaN')");
-    tx(function () {new BigNumber('12.345').dp([])}, ".dp([])");
-    tx(function () {new BigNumber('12.345').dp({})}, ".dp({})");
-    tx(function () {new BigNumber('12.345').dp('')}, ".dp('')");
-    tx(function () {new BigNumber('12.345').dp(' ')}, ".dp(' ')");
-    tx(function () {new BigNumber('12.345').dp('hello')}, ".dp('hello')");
-    tx(function () {new BigNumber('12.345').dp('\t')}, ".dp('\t')");
-    tx(function () {new BigNumber('12.345').dp(new Date)}, ".dp(new Date)");
-    tx(function () {new BigNumber('12.345').dp(new RegExp)}, ".dp(new RegExp)");
-    tx(function () {new BigNumber('12.345').dp(7.5)}, ".dp(7.5)");
-    tx(function () {new BigNumber('12.345').dp('-1.1e1')}, ".dp('-1.1e1')");
+    tx(function () {new BigDecimal('12.345').dp(NaN)}, ".dp(NaN)");
+    tx(function () {new BigDecimal('12.345').dp('NaN')}, ".dp('NaN')");
+    tx(function () {new BigDecimal('12.345').dp([])}, ".dp([])");
+    tx(function () {new BigDecimal('12.345').dp({})}, ".dp({})");
+    tx(function () {new BigDecimal('12.345').dp('')}, ".dp('')");
+    tx(function () {new BigDecimal('12.345').dp(' ')}, ".dp(' ')");
+    tx(function () {new BigDecimal('12.345').dp('hello')}, ".dp('hello')");
+    tx(function () {new BigDecimal('12.345').dp('\t')}, ".dp('\t')");
+    tx(function () {new BigDecimal('12.345').dp(new Date)}, ".dp(new Date)");
+    tx(function () {new BigDecimal('12.345').dp(new RegExp)}, ".dp(new RegExp)");
+    tx(function () {new BigDecimal('12.345').dp(7.5)}, ".dp(7.5)");
+    tx(function () {new BigDecimal('12.345').dp('-1.1e1')}, ".dp('-1.1e1')");
 
-    tx(function () {new BigNumber('12.345').dp('-1')}, ".dp('-1')");
-    tx(function () {new BigNumber('12.345').dp(-23)}, ".dp(-23)");
-    tx(function () {new BigNumber('12.345').dp(MAX + 1)}, ".dp(MAX + 1)");
-    tx(function () {new BigNumber('12.345').dp(MAX + 0.1)}, ".dp(MAX + 1)");
-    tx(function () {new BigNumber('12.345').dp('-0.01')}, ".dp('-0.01')");
-    tx(function () {new BigNumber('12.345').dp('-1e-1')}, ".dp('-1e-1')");
-    tx(function () {new BigNumber('12.345').dp(Infinity)}, ".dp(Infinity)");
-    tx(function () {new BigNumber('12.345').dp('-Infinity')}, ".dp('-Infinity')");
+    tx(function () {new BigDecimal('12.345').dp('-1')}, ".dp('-1')");
+    tx(function () {new BigDecimal('12.345').dp(-23)}, ".dp(-23)");
+    tx(function () {new BigDecimal('12.345').dp(MAX + 1)}, ".dp(MAX + 1)");
+    tx(function () {new BigDecimal('12.345').dp(MAX + 0.1)}, ".dp(MAX + 1)");
+    tx(function () {new BigDecimal('12.345').dp('-0.01')}, ".dp('-0.01')");
+    tx(function () {new BigDecimal('12.345').dp('-1e-1')}, ".dp('-1e-1')");
+    tx(function () {new BigDecimal('12.345').dp(Infinity)}, ".dp(Infinity)");
+    tx(function () {new BigDecimal('12.345').dp('-Infinity')}, ".dp('-Infinity')");
 
     t('13', '12.345', 0, 2);
     t('12', '12.345', 0, null);
@@ -1996,26 +1996,26 @@ Test('decimalPlaces', function () {
     t('13', '12.345', 0, 0);
     t('13', '12.345', 0, -0);
 
-    tx(function () {new BigNumber('12.345').dp(0, NaN)}, ".dp(0, NaN)");
-    tx(function () {new BigNumber('12.345').dp(0, 'NaN')}, ".dp(0, 'NaN')");
-    tx(function () {new BigNumber('12.345').dp(0, [])}, ".dp(0, [])");
-    tx(function () {new BigNumber('12.345').dp(0, {})}, ".dp(0, {})");
-    tx(function () {new BigNumber('12.345').dp(0, '')}, ".dp(0, '')");
-    tx(function () {new BigNumber('12.345').dp(0, ' ')}, ".dp(0, ' ')");
-    tx(function () {new BigNumber('12.345').dp(0, 'hello')}, ".dp(0, 'hello')");
-    tx(function () {new BigNumber('12.345').dp(0, '\t')}, ".dp(0, '\t')");
-    tx(function () {new BigNumber('12.345').dp(0, new Date)}, ".dp(0, new Date)");
-    tx(function () {new BigNumber('12.345').dp(0, new RegExp)}, ".dp(0, new RegExp)");
-    tx(function () {new BigNumber('12.345').dp(0, 7.5)}, ".dp(0, 7.5)");
-    tx(function () {new BigNumber('12.345').dp(0, '-1.1e1')}, ".dp(0, '-1.1e1')");
+    tx(function () {new BigDecimal('12.345').dp(0, NaN)}, ".dp(0, NaN)");
+    tx(function () {new BigDecimal('12.345').dp(0, 'NaN')}, ".dp(0, 'NaN')");
+    tx(function () {new BigDecimal('12.345').dp(0, [])}, ".dp(0, [])");
+    tx(function () {new BigDecimal('12.345').dp(0, {})}, ".dp(0, {})");
+    tx(function () {new BigDecimal('12.345').dp(0, '')}, ".dp(0, '')");
+    tx(function () {new BigDecimal('12.345').dp(0, ' ')}, ".dp(0, ' ')");
+    tx(function () {new BigDecimal('12.345').dp(0, 'hello')}, ".dp(0, 'hello')");
+    tx(function () {new BigDecimal('12.345').dp(0, '\t')}, ".dp(0, '\t')");
+    tx(function () {new BigDecimal('12.345').dp(0, new Date)}, ".dp(0, new Date)");
+    tx(function () {new BigDecimal('12.345').dp(0, new RegExp)}, ".dp(0, new RegExp)");
+    tx(function () {new BigDecimal('12.345').dp(0, 7.5)}, ".dp(0, 7.5)");
+    tx(function () {new BigDecimal('12.345').dp(0, '-1.1e1')}, ".dp(0, '-1.1e1')");
 
-    tx(function () {new BigNumber('12.345').dp(0, '-1')}, ".dp(0, -1')");
-    tx(function () {new BigNumber('12.345').dp(0, -23)}, ".dp(0, -23)");
-    tx(function () {new BigNumber('12.345').dp(0, 8.01)}, ".dp(0, 8.01)");
-    tx(function () {new BigNumber('12.345').dp(0, 9)}, ".dp(0, 9)");
-    tx(function () {new BigNumber('12.345').dp(0, -1)}, ".dp(0, -1)");
-    tx(function () {new BigNumber('12.345').dp(0, '-0.01')}, ".dp(0, '-0.01')");
-    tx(function () {new BigNumber('12.345').dp(0, '-1e-1')}, ".dp(0, '-1e-1')");
-    tx(function () {new BigNumber('12.345').dp(0, Infinity)}, ".dp(0, Infinity)");
-    tx(function () {new BigNumber('12.345').dp(0, '-Infinity')}, ".dp(0, '-Infinity')");
+    tx(function () {new BigDecimal('12.345').dp(0, '-1')}, ".dp(0, -1')");
+    tx(function () {new BigDecimal('12.345').dp(0, -23)}, ".dp(0, -23)");
+    tx(function () {new BigDecimal('12.345').dp(0, 8.01)}, ".dp(0, 8.01)");
+    tx(function () {new BigDecimal('12.345').dp(0, 9)}, ".dp(0, 9)");
+    tx(function () {new BigDecimal('12.345').dp(0, -1)}, ".dp(0, -1)");
+    tx(function () {new BigDecimal('12.345').dp(0, '-0.01')}, ".dp(0, '-0.01')");
+    tx(function () {new BigDecimal('12.345').dp(0, '-1e-1')}, ".dp(0, '-1e-1')");
+    tx(function () {new BigDecimal('12.345').dp(0, Infinity)}, ".dp(0, Infinity)");
+    tx(function () {new BigDecimal('12.345').dp(0, '-Infinity')}, ".dp(0, '-Infinity')");
 });

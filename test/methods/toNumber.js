@@ -7,29 +7,29 @@ Test('toNumber', function () {
     }
 
     function t(value, n) {
-        Test.areEqual(n, new BigNumber(value).toNumber());
+        Test.areEqual(n, new BigDecimal(value).toNumber());
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
         EXPONENTIAL_AT: 1E9
     });
 
-    Test.areEqual(false, isMinusZero(new BigNumber('0').toNumber()));
-    Test.areEqual(false, isMinusZero(new BigNumber('0.0').toNumber()));
-    Test.areEqual(false, isMinusZero(new BigNumber('0.000000000000').toNumber()));
-    Test.areEqual(false, isMinusZero(new BigNumber('0e+0').toNumber()));
-    Test.areEqual(false, isMinusZero(new BigNumber('0e-0').toNumber()));
-    Test.areEqual(false, isMinusZero(new BigNumber('1e-1000000000').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('0').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('0.0').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('0.000000000000').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('0e+0').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('0e-0').toNumber()));
+    Test.areEqual(false, isMinusZero(new BigDecimal('1e-1000000000').toNumber()));
 
-    Test.areEqual(true, isMinusZero(new BigNumber('-0').toNumber()));
-    Test.areEqual(true, isMinusZero(new BigNumber('-0.0').toNumber()));
-    Test.areEqual(true, isMinusZero(new BigNumber('-0.000000000000').toNumber()));
-    Test.areEqual(true, isMinusZero(new BigNumber('-0e+0').toNumber()));
-    Test.areEqual(true, isMinusZero(new BigNumber('-0e-0').toNumber()));
-    Test.areEqual(true, isMinusZero(new BigNumber('-1e-1000000000').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-0').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-0.0').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-0.000000000000').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-0e+0').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-0e-0').toNumber()));
+    Test.areEqual(true, isMinusZero(new BigDecimal('-1e-1000000000').toNumber()));
 
     t(1, 1);
     t('1', 1);

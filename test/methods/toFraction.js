@@ -4,10 +4,10 @@ Test('toFraction', function () {
     var u;
 
     function t(expected, value, maxDenominator){
-        Test.areEqual(expected, new BigNumber(value).toFraction(maxDenominator).toString());
+        Test.areEqual(expected, new BigDecimal(value).toFraction(maxDenominator).toString());
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         RANGE: 1E9,
@@ -2937,30 +2937,30 @@ Test('toFraction', function () {
 
     t('2469,20', '12.345e1', u);
     t('2469,20', '12.345e1', '2.1e1');
-    t('1111,9',  '12.345e1', new BigNumber(10));
-    t('2469,20', '12.345e1', new BigNumber('123e399'));
+    t('1111,9',  '12.345e1', new BigDecimal(10));
+    t('2469,20', '12.345e1', new BigDecimal('123e399'));
 
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('')}, ".toFraction('')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(' ')}, ".toFraction(' ')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('\t')}, ".toFraction('\t')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(NaN)}, ".toFraction(NaN)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('NaN')}, ".toFraction('NaN')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('hello')}, ".toFraction('hello')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction([])}, ".toFraction([])");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction({})}, ".toFraction({})");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(true)}, ".toFraction(true)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(false)}, ".toFraction(false)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(function (){})}, ".toFraction(function (){})");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(new Number)}, ".toFraction(new Number)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(new String)}, ".toFraction(new String)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(new Date)},".toFraction(new Date)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(new RegExp)}, ".toFraction(new RegExp)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('')}, ".toFraction('')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(' ')}, ".toFraction(' ')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('\t')}, ".toFraction('\t')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(NaN)}, ".toFraction(NaN)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('NaN')}, ".toFraction('NaN')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('hello')}, ".toFraction('hello')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction([])}, ".toFraction([])");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction({})}, ".toFraction({})");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(true)}, ".toFraction(true)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(false)}, ".toFraction(false)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(function (){})}, ".toFraction(function (){})");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(new Number)}, ".toFraction(new Number)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(new String)}, ".toFraction(new String)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(new Date)},".toFraction(new Date)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(new RegExp)}, ".toFraction(new RegExp)");
 
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(7.5)}, ".toFraction(7.5)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(new BigNumber('225.435435'))}, ".toFraction(new BigNumber('225.435435'))");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(0)}, ".toFraction(0)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('0.99')}, ".toFraction('0.99')");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(-1)}, ".toFraction(-1)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction(-23)}, ".toFraction(-23)");
-    Test.isException(function () {new BigNumber('12.3e1').toFraction('-Infinity')}, ".toFraction('-Infinity')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(7.5)}, ".toFraction(7.5)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(new BigDecimal('225.435435'))}, ".toFraction(new BigNumber('225.435435'))");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(0)}, ".toFraction(0)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('0.99')}, ".toFraction('0.99')");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(-1)}, ".toFraction(-1)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction(-23)}, ".toFraction(-23)");
+    Test.isException(function () {new BigDecimal('12.3e1').toFraction('-Infinity')}, ".toFraction('-Infinity')");
 });

@@ -3,17 +3,17 @@ if (typeof Test === 'undefined') require('../tester');
 Test('random', function () {
     var dp, i, msg, r;
 
-    BigNumber.config({ CRYPTO: false });
+    BigDecimal.config({ CRYPTO: false });
 
     for ( i = 0; i < 4994; i++ ) {
 
         if ( i & 1 ) {
             dp = Math.random() * 100 + 1 | 0;
-            BigNumber.config({ DECIMAL_PLACES: dp });
-            r = BigNumber.random();
+            BigDecimal.config({ DECIMAL_PLACES: dp });
+            r = BigDecimal.random();
         } else {
             dp = Math.random() * 100 | 0;
-            r = BigNumber.random(dp);
+            r = BigDecimal.random(dp);
         }
 
         //Test.write('\n  dp: ' + dp + '  r: ' + r.toString());
@@ -27,7 +27,7 @@ Test('random', function () {
             msg = 'r.lt(0) || r.gte(1)';
 
         // Check that the attributes of r are formed correctly.
-        } else if ( !r.eq( new BigNumber(r) ) || !r.eq( new BigNumber( r.toString() ) ) ) {
+        } else if ( !r.eq( new BigDecimal(r) ) || !r.eq( new BigDecimal( r.toString() ) ) ) {
             msg = '!r.eq( new BigNumber(r) ) || !r.eq( new BigNumber( r.toString() ) )';
         }
 
@@ -45,15 +45,15 @@ Test('random', function () {
         }
     }
 
-    BigNumber.random(undefined);
-    BigNumber.random(null);
-    BigNumber.random(3);
-    BigNumber.random(0);
+    BigDecimal.random(undefined);
+    BigDecimal.random(null);
+    BigDecimal.random(3);
+    BigDecimal.random(0);
 
-    Test.isException(function () { BigNumber.random(Infinity) }, 'Infinity');
-    Test.isException(function () { BigNumber.random('-Infinity') }, "'-Infinity'");
-    Test.isException(function () { BigNumber.random(NaN) }, 'NaN');
-    Test.isException(function () { BigNumber.random('ugh') }, "'ugh'");
-    Test.isException(function () { BigNumber.random(-1) }, "-1");
-    Test.isException(function () { BigNumber.random({}) }, "{}");
+    Test.isException(function () { BigDecimal.random(Infinity) }, 'Infinity');
+    Test.isException(function () { BigDecimal.random('-Infinity') }, "'-Infinity'");
+    Test.isException(function () { BigDecimal.random(NaN) }, 'NaN');
+    Test.isException(function () { BigDecimal.random('ugh') }, "'ugh'");
+    Test.isException(function () { BigDecimal.random(-1) }, "-1");
+    Test.isException(function () { BigDecimal.random({}) }, "{}");
 });

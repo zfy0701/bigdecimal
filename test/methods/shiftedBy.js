@@ -3,10 +3,10 @@ if (typeof Test === 'undefined') require('../tester');
 Test('shiftedBy', function () {
 
     function t(expected, n, k) {
-        Test.areEqual(String(expected), String(new BigNumber(n).shiftedBy(k)));
+        Test.areEqual(String(expected), String(new BigDecimal(n).shiftedBy(k)));
     }
 
-    BigNumber.config({
+    BigDecimal.config({
         DECIMAL_PLACES: 20,
         ROUNDING_MODE: 4,
         EXPONENTIAL_AT: [-7, 21],
@@ -41,28 +41,28 @@ Test('shiftedBy', function () {
     t(0, 0, -2);
     t(2, 2, 0);
 
-    Test.areEqual('0', new BigNumber(0).shiftedBy(0).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).shiftedBy(0).valueOf());
-    Test.areEqual('0', new BigNumber(0).shiftedBy(-0).valueOf());
-    Test.areEqual('-0', new BigNumber(-0).shiftedBy(-0).valueOf());
-    Test.areEqual('0', new BigNumber(0).shiftedBy(1000).valueOf());
+    Test.areEqual('0', new BigDecimal(0).shiftedBy(0).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).shiftedBy(0).valueOf());
+    Test.areEqual('0', new BigDecimal(0).shiftedBy(-0).valueOf());
+    Test.areEqual('-0', new BigDecimal(-0).shiftedBy(-0).valueOf());
+    Test.areEqual('0', new BigDecimal(0).shiftedBy(1000).valueOf());
 
     t('1e+1000000', 1, 1e6)
     t(1, '1e-1000000', 1e6)
     t('9.9e+999999999', 0.99, 1e+9);
 
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(true)}, ".shiftedBy(true)");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(false)}, ".shiftedBy(false)");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy([])}, ".shiftedBy([])");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy({})}, ".shiftedBy({})");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy('')}, ".shiftedBy('')");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(' ')}, ".shiftedBy(' ')");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy('4e')}, ".shiftedBy('4e')");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy('hello')}, ".shiftedBy('hello')");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy('\t')}, ".shiftedBy('\t')");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(new Date)}, ".shiftedBy(new Date)");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(new RegExp)}, ".shiftedBy(new RegExp)");
-    Test.isException(function () {new BigNumber('12.345').shiftedBy(function (){})}, ".shiftedBy(function (){})");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(true)}, ".shiftedBy(true)");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(false)}, ".shiftedBy(false)");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy([])}, ".shiftedBy([])");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy({})}, ".shiftedBy({})");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy('')}, ".shiftedBy('')");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(' ')}, ".shiftedBy(' ')");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy('4e')}, ".shiftedBy('4e')");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy('hello')}, ".shiftedBy('hello')");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy('\t')}, ".shiftedBy('\t')");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(new Date)}, ".shiftedBy(new Date)");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(new RegExp)}, ".shiftedBy(new RegExp)");
+    Test.isException(function () {new BigDecimal('12.345').shiftedBy(function (){})}, ".shiftedBy(function (){})");
 
     t('3.45345e+196', 0.000345345, 200);
     t('3.45345e-14', 0.000345345, -10);
